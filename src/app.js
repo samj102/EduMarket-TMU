@@ -6,6 +6,8 @@ const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
 const app = express();
 
+require("dotenv").config();
+
 app.use(logger("dev")); //logs requests
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
