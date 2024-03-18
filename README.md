@@ -24,3 +24,16 @@ Back-End: Powered by Node.js and Express, with a robust database management syst
 Database: Utilizes MongoDB for efficient data storage and retrieval.
 API Integration: Incorporates essential APIs for added functionality like maps and payment gateways.
 Security: Implements best practices in web security to protect user data and transactions.
+
+# Development Server
+## Frontend
+1. `cd frontend/nourishnest`
+2. `npm start`
+3. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+4. Make changes to the code and the page will reload automatically.
+
+## Backend
+1. `cd backend/nourishnest`
+2. `python manage.py runserver`
+3. To create a new admin user run: `python manage.py createsuperuser`
+
