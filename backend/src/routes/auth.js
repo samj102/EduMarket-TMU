@@ -47,14 +47,19 @@ router.post("/register", async function (req, res, next) {
   const { name, email, password } = req.body;
   try {
     const hashedPassword = hashPassword(password);
-    const user = new userModel({
-      name: name,
-      email: email,
-      password: hashedPassword,
-    });
-    await user.save();
-    const token = generateToken({ email: email, role: "student" });
-    res.status(200).json({ token });
+    const user = await userModel.findOne({ email: email });
+    if (!user) {
+      const newUser = new userModel({
+        name: name,
+        email: email,
+        password: hashedPassword,
+      });
+      await newUser.save();
+      const token = generateToken({ email: email, role: "student" });
+      res.status(200).json({ token });
+    } else {
+      next(createError(409, "User already exists"));
+    }
   } catch (err) {
     next(createError(500, err.message));
   }
@@ -65,21 +70,22 @@ router.post("/login", async function (req, res, next) {
   const user = await userModel.findOne({ email: email });
   if (!user) {
     next(createError(401, "Authentication failed"));
-  }
-  const userdata = {
-    email: user.name,
-    role: user.role,
-  };
-  try {
-    const match = await bcrypt.compare(password, user.password);
-    if (match) {
-      const token = generateToken(userdata);
-      res.status(200).json({ token });
-    } else {
-      next(createError(401, "Incorrect Password"));
+  } else {
+    const userdata = {
+      email: email,
+      role: user.role,
+    };
+    try {
+      const match = await bcrypt.compare(password, user.password);
+      if (match) {
+        const token = generateToken(userdata);
+        res.status(200).json({ token });
+      } else {
+        next(createError(401, "Incorrect Password"));
+      }
+    } catch (err) {
+      next(createError(500, "Login failed"));
     }
-  } catch (err) {
-    next(createError(500, "Login failed"));
   }
 });
 
