@@ -31,7 +31,9 @@ API Integration: Incorporates essential APIs for added functionality like maps a
 Security: Implements best practices in web security to protect user data and transactions.
 
 # Development Server
+
 ## Frontend
+
 1. `cd frontend`
 2. `npm start`
 3. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -39,3 +41,41 @@ Security: Implements best practices in web security to protect user data and tra
 
 ## Backend
 
+1. `cd backend`
+2. Add .env file for environment variables
+3. Install dependencies with `npm ci`
+4. Start the server with `npm run devstart`
+5. The server will be started on http://localhost:8080
+
+## API Endpoints
+
+### Authentication
+
+The application provides the following authentication endpoints:
+
+#### POST /auth/register
+
+Registers a new user.
+
+Request body:
+
+```json
+{
+  "name": "<name>",
+  "email": "<email>",
+  "password": "<password>"
+}
+```
+
+#### POST /auth/login
+
+Logs in a user.
+
+Request body:
+
+```json
+{
+  "email": "<email>",
+  "password": "<password>"
+}
+```
