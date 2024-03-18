@@ -5,6 +5,8 @@ const createError = require("http-errors");
 const userModel = require("../models/userModel");
 
 const router = express.Router();
+const secretKey = process.env.JWT_SECRET_KEY;
+const algorithm = process.env.JWT_ALGORITHM;
 
 function hashPassword(password) {
   const saltRounds = 10;
@@ -15,21 +17,29 @@ function hashPassword(password) {
   }
 }
 
-function authenticateToken(req, res, next) {
+function authenticateUserToken(req, res, next) {
   const token = req.cookies["access_token"];
   if (!token) return res.sendStatus(401);
-  jwt.verify(token, process.env.JWT_SECRET_KEY, (err) => {
+  jwt.verify(token, secretKey, (err) => {
     if (err) return next(createError(403));
     next();
   });
 }
 
+function authenticateAdminToken(req, res, next) {
+  const token = req.cookies["access_token"];
+  if (!token) return res.sendStatus(401);
+  jwt.verify(token, secretKey, (err, user) => {
+    if (err) return next(createError(403));
+    if (user.role !== "admin") return next(createError(403));
+    next();
+  });
+}
+
 function generateToken(data) {
-  secretKey = process.env.JWT_SECRET_KEY;
-  algorithm = process.env.JWT_ALGORITHM;
   return jwt.sign(data, secretKey, {
     algorithm: algorithm,
-    expiresIn: "1h",
+    // expiresIn: "1h",
   });
 }
 
@@ -37,14 +47,13 @@ router.post("/register", async function (req, res, next) {
   const { name, email, password } = req.body;
   try {
     const hashedPassword = hashPassword(password);
-    const userdata = {
+    const user = new userModel({
       name: name,
       email: email,
       password: hashedPassword,
-    };
-    const user = new userModel(userdata);
+    });
     await user.save();
-    const token = generateToken(userdata);
+    const token = generateToken({ email: email, role: "student" });
     res.status(200).json({ token });
   } catch (err) {
     next(createError(500, err.message));
@@ -58,9 +67,8 @@ router.post("/login", async function (req, res, next) {
     next(createError(401, "Authentication failed"));
   }
   const userdata = {
-    name: user.name,
-    email: user.email,
-    password: user.password,
+    email: user.name,
+    role: user.role,
   };
   try {
     const match = await bcrypt.compare(password, user.password);
@@ -75,4 +83,8 @@ router.post("/login", async function (req, res, next) {
   }
 });
 
-module.exports = router;
+module.exports = {
+  authRouter: router,
+  authenticateAdminToken: authenticateAdminToken,
+  authenticateUserToken: authenticateUserToken,
+};

@@ -2,9 +2,11 @@ const createError = require("http-errors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const authRouter = require("./routes/auth");
-const app = express();
+
+const { authRouter } = require("./routes/auth");
 const connectDB = require("../config/db");
+
+const app = express();
 
 require("dotenv").config();
 
