@@ -42,7 +42,7 @@ function Signup({ setIsLoggedIn }) {
           history("/home", { state: { id: email, token: res.data.token } });
         })
         .catch((e) => {
-          alert("wrong details");
+          if (e.response.status == 409) alert("User already exists");
           console.log(e);
         });
     } catch (e) {

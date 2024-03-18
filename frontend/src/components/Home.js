@@ -24,7 +24,7 @@ function Home() {
   if (decoded.role == "admin") {
     return (
       <div className="homepage">
-        <h1>Hello {decoded.name} and welcome to the home page</h1>
+        <h1>Hello {decoded.email} and welcome to the home page</h1>
         {/* 
         {data.map((dt) => (
           <div>
