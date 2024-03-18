@@ -18,7 +18,7 @@ Communication Platform: In-app messaging to connect buyers and sellers securely.
 Admin Dashboard: Comprehensive tools for site management and content moderation.
 Mobile Optimization: Full functionality across a variety of mobile devices for on-the-go access.
 
-##🛠 Technical Stack
+🛠 Technical Stack
 
 Front-End: Developed with HTML5, CSS3, and React.js for a dynamic, responsive UI.
 Back-End: Powered by Node.js and Express, with a robust database management system.
