@@ -27,7 +27,7 @@ Security: Implements best practices in web security to protect user data and tra
 
 # Development Server
 ## Frontend
-1. `cd frontend/nourishnest`
+1. `cd frontend`
 2. `npm start`
 3. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 4. Make changes to the code and the page will reload automatically.
