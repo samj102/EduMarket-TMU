@@ -5,6 +5,7 @@ const logger = require("morgan");
 const cors = require("cors");
 
 const { authRouter } = require("./routes/auth");
+const userRouter = require("./routes/user")
 const connectDB = require("../config/db");
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(cookieParser());
 
 // routes
 app.use("/auth", authRouter);
+app.use("/user", userRouter);
 connectDB();
 
 // catch 404 and forward to error handler
