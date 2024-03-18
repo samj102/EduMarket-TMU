@@ -21,9 +21,13 @@ Mobile Optimization: Full functionality across a variety of mobile devices for o
 🛠 Technical Stack
 
 Front-End: Developed with HTML5, CSS3, and React.js for a dynamic, responsive UI.
+
 Back-End: Powered by Node.js and Express, with a robust database management system.
+
 Database: Utilizes MongoDB for efficient data storage and retrieval.
+
 API Integration: Incorporates essential APIs for added functionality like maps and payment gateways.
+
 Security: Implements best practices in web security to protect user data and transactions.
 
 # Development Server
