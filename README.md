@@ -33,7 +33,4 @@ Security: Implements best practices in web security to protect user data and tra
 4. Make changes to the code and the page will reload automatically.
 
 ## Backend
-1. `cd backend/nourishnest`
-2. `python manage.py runserver`
-3. To create a new admin user run: `python manage.py createsuperuser`
 
