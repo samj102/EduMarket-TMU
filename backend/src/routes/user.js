@@ -5,14 +5,30 @@ const createError = require("http-errors");
 
 
 //To check all the users in the databse
-router.get("/view", async function (req, res, next){
+router.get("/", async function (req, res, next){
     try {
         const users = await userModel.find({});
         res.status(200).json(users);
     } catch (error) {
-        res.status(500).json({message: error.message});
+        next(createError(500, error.message));
     }
 })
+
+//View a user by id
+router.get("/:id", async function (req, res, next){
+    try {
+        const {id} = req.params;
+        const users = await userModel.findById(id);
+        res.status(200).json(users);
+    } catch (error) {
+        if (error.kind === 'ObjectId') { 
+            next(createError(404, "User not found"));
+          } else {
+            next(createError(500, "Failed attempt")); 
+        }
+    }
+})
+
 
 //Update a user
 router.put("/update/:id", async function (req, res, next){
@@ -25,13 +41,14 @@ router.put("/update/:id", async function (req, res, next){
         }
         else{
             const user = await userModel.findByIdAndUpdate(id, {name:name, email:email});
-            if (!user){
-            next(createError(404).json({message: "User not found"}));
-            }
             res.status(200).json(user);
         }
     } catch (error) {
-        next(createError(500, "Failed attempt"));
+        if (error.kind === 'ObjectId') { 
+            next(createError(404, "User not found"));
+          } else {
+            next(createError(500, "Failed attempt")); 
+        }
     }
 })
 
