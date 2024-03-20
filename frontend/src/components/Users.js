@@ -12,7 +12,7 @@ function Users() {
 
   //   Fetching users from the backend server
   useEffect(() => {
-    fetch("http://localhost:3000/users")
+    fetch("http://localhost:8080/user")
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
@@ -27,7 +27,8 @@ function Users() {
 
           {data.map((dt) => (
             <div>
-              <h1>{dt.email}</h1>
+              <h1>{dt.name}</h1>
+              <h1>{dt._id}</h1>
               <h3>{dt.role}</h3>
             </div>
           ))}
