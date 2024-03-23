@@ -1,14 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, userNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Users() {
   const location = useLocation();
   const [data, setData] = useState([]);
 
-  //1.Get the token from history    2.Decode the token         3.Is admin?            4.If admin call server with auth as a token.
-
-  //   history("/users", { state: { id: email, token: res.data.token } });
+  function deleteUser(id, name) {
+    if (window.confirm(`Are you sure you want to delete ${name}`)) {
+      fetch(`http://localhost:8080/user/delete/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          fetch("http://localhost:8080/user")
+            .then((res) => res.json())
+            .then((val) => setData(val));
+        });
+    } else {
+    }
+  }
 
   //   Fetching users from the backend server
   useEffect(() => {
@@ -27,8 +40,13 @@ function Users() {
 
           {data.map((dt) => (
             <div>
-              <h1>{dt.name}</h1>
-              <h1>{dt._id}</h1>
+              <h1>
+                {dt.name}{" "}
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  onClick={() => deleteUser(dt._id, dt.name)}
+                />
+              </h1>
               <h3>{dt.role}</h3>
             </div>
           ))}
@@ -45,7 +63,7 @@ function Users() {
     }
   } catch (error) {
     alert("Please login");
-    window.location.href = "http://localhost:3001/login";
+    window.location.href = "http://localhost:3000/login";
   }
 }
 
