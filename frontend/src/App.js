@@ -1,3 +1,4 @@
+import ContactUS from "./components/ContactUs.js";
 import Home from "./components/Home.js";
 import Login from "./components/Login.js";
 import Signup from "./components/Signup.js";
@@ -40,6 +41,7 @@ function App() {
           <Route path="/items-for-sale" element={<Home />} />
           <Route path="/academic-services" element={<Home />} />
           <Route path="/all-users" element={<Users />} />
+          <Route path="/ContactUs" element={<ContactUS />} />
         </Routes>
       </Router>
     </div>
