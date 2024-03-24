@@ -17,25 +17,6 @@ function hashPassword(password) {
   }
 }
 
-function authenticateUserToken(req, res, next) {
-  const token = req.cookies["access_token"];
-  if (!token) return res.sendStatus(401);
-  jwt.verify(token, secretKey, (err) => {
-    if (err) return next(createError(403));
-    next();
-  });
-}
-
-function authenticateAdminToken(req, res, next) {
-  const token = req.cookies["access_token"];
-  if (!token) return res.sendStatus(401);
-  jwt.verify(token, secretKey, (err, user) => {
-    if (err) return next(createError(403));
-    if (user.role !== "admin") return next(createError(403));
-    next();
-  });
-}
-
 function generateToken(data) {
   return jwt.sign(data, secretKey, {
     algorithm: algorithm,
@@ -72,6 +53,7 @@ router.post("/login", async function (req, res, next) {
     next(createError(401, "Authentication failed"));
   } else {
     const userdata = {
+      id: user._id,
       email: email,
       role: user.role,
     };
@@ -89,8 +71,4 @@ router.post("/login", async function (req, res, next) {
   }
 });
 
-module.exports = {
-  authRouter: router,
-  authenticateAdminToken: authenticateAdminToken,
-  authenticateUserToken: authenticateUserToken,
-};
+module.exports = router;
