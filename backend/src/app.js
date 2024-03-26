@@ -4,14 +4,17 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 
-const { authRouter } = require("./routes/auth");
-const userRouter = require("./routes/user")
+const authRouter = require("./routes/auth");
+const userRouter = require("./routes/user");
 const connectDB = require("../config/db");
+const { authenticateUserToken } = require("./middleware");
 
 const app = express();
 
+// load environment variables
 require("dotenv").config();
 
+// middlewares
 app.use(cors());
 app.use(logger("dev")); //logs requests
 app.use(express.json());
