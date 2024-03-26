@@ -10,6 +10,7 @@ import Users from "./components/Users.js";
 import Logout from "./components/Logout.js";
 import AboutUsPage from "./components/AboutUs.js";
 import UploadItemPage from "./components/itemsForSale.js";
+import AcademicServicesPage from "./components/AcademicServices.js";
 
 function App() {
   const [isLoggedin, setisLoggedin] = useState("false");
@@ -46,6 +47,7 @@ function App() {
           <Route path="/ToS" element={<ToS />} />
           <Route path="/About_Us" element={<AboutUsPage />} />
           <Route path="/itemsForSale" element={<UploadItemPage />} />
+          <Route path="/AcademicServices" element={<AcademicServicesPage />} />
         </Routes>
       </Router>
     </div>
