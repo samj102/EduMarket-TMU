@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 function Login({ setIsLoggedIn }) {
   setIsLoggedIn("false");
   const history = useNavigate();
+  document.body.style = "background: #B3FFCC";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +24,8 @@ function Login({ setIsLoggedIn }) {
             // console.log(res.data);
             setIsLoggedIn("true");
             localStorage.setItem("login", res.data.token);
+            document.cookie = `access_token=${res.data.token}`;
+
             history("/home", { state: { id: email, token: res.data.token } });
           } else if (res.status == 401) {
             alert("User has not sign up");
