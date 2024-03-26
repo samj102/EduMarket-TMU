@@ -46,7 +46,7 @@ function App() {
           <Route path="/academic-services" element={<Home />} />
           <Route path="/all-users" element={<Users />} />
           <Route path="/ToS" element={<ToS />} />
-          <Route path="/About_Us" element={<AboutUsPage />} />
+          <Route path="/AboutUs" element={<AboutUsPage />} />
           <Route path="/itemsForSale" element={<UploadItemPage />} />
           <Route path="/AcademicServices" element={<AcademicServicesPage />} />
           <Route path="/ContactUs" element={<ContactUsPage />} />
