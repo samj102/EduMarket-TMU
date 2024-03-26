@@ -34,6 +34,9 @@ function myNavbar() {
               >
                 Manage Users
               </Nav.Link>
+              <Nav.Link className="d-flex" as={Link} to="/edit-profile">
+                Edit Profile
+              </Nav.Link>
               <Nav.Link className="d-flex" as={Link} to="/logout">
                 Logout
               </Nav.Link>

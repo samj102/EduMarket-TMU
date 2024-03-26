@@ -12,9 +12,11 @@ import AboutUsPage from "./components/AboutUs.js";
 import UploadItemPage from "./components/itemsForSale.js";
 import AcademicServicesPage from "./components/AcademicServices.js";
 import ContactUsPage from "./components/ContactUs.js";
+import EditProfile from "./components/EditProfile.js";
 
 function App() {
   const [isLoggedin, setisLoggedin] = useState("false");
+  const [profile, setProfile] = useState({});
   useEffect(() => {
     if (localStorage.length > 0) {
       setisLoggedin("true");
@@ -33,7 +35,9 @@ function App() {
         <Routes>
           <Route
             path="/login"
-            element={<Login setIsLoggedIn={setisLoggedin} />}
+            element={
+              <Login setIsLoggedIn={setisLoggedin} setProfile={setProfile} />
+            }
           />
           <Route
             path="/signup"
@@ -50,6 +54,10 @@ function App() {
           <Route path="/itemsForSale" element={<UploadItemPage />} />
           <Route path="/AcademicServices" element={<AcademicServicesPage />} />
           <Route path="/ContactUs" element={<ContactUsPage />} />
+          <Route
+            path="/edit-profile"
+            element={<EditProfile profile={profile} />}
+          />
         </Routes>
       </Router>
     </div>
