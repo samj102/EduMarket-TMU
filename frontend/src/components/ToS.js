@@ -3,7 +3,7 @@ import { useLocation, userNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 
-function ContactUS() {
+function ToS() {
 
 
 
@@ -25,4 +25,4 @@ function ContactUS() {
     );
   }
 
-export default ContactUS;
+export default ToS;
