@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar.js";
 import "bootstrap/dist/css/bootstrap.css";
 import Users from "./components/Users.js";
 import Logout from "./components/Logout.js";
+import AboutUsPage from "./components/AboutUs.js";
 
 function App() {
   const [isLoggedin, setisLoggedin] = useState("false");
@@ -42,6 +43,7 @@ function App() {
           <Route path="/academic-services" element={<Home />} />
           <Route path="/all-users" element={<Users />} />
           <Route path="/ToS" element={<ToS />} />
+          <Route path="/About_Us" element={<AboutUsPage />} />
         </Routes>
       </Router>
     </div>
