@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Users from "./components/Users.js";
 import Logout from "./components/Logout.js";
 import AboutUsPage from "./components/AboutUs.js";
+import UploadItemPage from "./components/itemsForSale.js";
 
 function App() {
   const [isLoggedin, setisLoggedin] = useState("false");
@@ -44,6 +45,7 @@ function App() {
           <Route path="/all-users" element={<Users />} />
           <Route path="/ToS" element={<ToS />} />
           <Route path="/About_Us" element={<AboutUsPage />} />
+          <Route path="/itemsForSale" element={<UploadItemPage />} />
         </Routes>
       </Router>
     </div>
