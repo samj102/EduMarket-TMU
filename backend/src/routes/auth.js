@@ -37,6 +37,11 @@ router.post("/register", async function (req, res, next) {
       });
       await newUser.save();
       const token = generateToken({ email: email, role: "student" });
+      res.cookie("access_token", token, {
+        httpOnly: true,
+        sameSite: "none",
+        expires: new Date(253402300000000), // Set expiry to a very large value
+      });
       res.status(200).json({ token });
     } else {
       next(createError(409, "User already exists"));
@@ -61,6 +66,11 @@ router.post("/login", async function (req, res, next) {
       const match = await bcrypt.compare(password, user.password);
       if (match) {
         const token = generateToken(userdata);
+        res.cookie("access_token", token, {
+          httpOnly: true,
+          sameSite: "none",
+          expires: new Date(253402300000000), // Set expiry to a very large value
+        });
         res.status(200).json({ token });
       } else {
         next(createError(401, "Incorrect Password"));
