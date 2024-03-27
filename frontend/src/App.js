@@ -56,7 +56,7 @@ function App() {
           <Route path="/ContactUs" element={<ContactUsPage />} />
           <Route
             path="/edit-profile"
-            element={<EditProfile profile={profile} />}
+            element={<EditProfile profile={profile} setProfile={setProfile} />}
           />
         </Routes>
       </Router>

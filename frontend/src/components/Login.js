@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import api from "../utils/api";
 import { jwtDecode } from "jwt-decode";
 
-localStorage.clear();
+// localStorage.clear();
 function Login({ setIsLoggedIn, setProfile }) {
   setIsLoggedIn("false");
   const history = useNavigate();
@@ -28,7 +28,7 @@ function Login({ setIsLoggedIn, setProfile }) {
         document.cookie = `access_token=${token}`;
         const decoded = jwtDecode(JSON.stringify(token));
         const { data } = await api.get(`/user/${decoded.id}`);
-        setProfile({ email: data.email, name: data.name });
+        setProfile({ email: data.email, name: data.name, id: data._id });
         history("/home", { state: { id: email, token: token } });
       } else if (res.status == 401) {
         alert("User has not sign up");

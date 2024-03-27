@@ -62,7 +62,10 @@ function myNavbar() {
               <Nav.Link as={Link} to="/api/academic-services">
                 Academic Services
               </Nav.Link>
-              <Nav.Link as={Link} to="/logout">
+              <Nav.Link className="d-flex" as={Link} to="/edit-profile">
+                Edit Profile
+              </Nav.Link>
+              <Nav.Link className="d-flex" as={Link} to="/logout">
                 Logout
               </Nav.Link>
             </Nav>
