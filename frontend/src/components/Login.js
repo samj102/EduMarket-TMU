@@ -3,12 +3,15 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../utils/api";
 import { jwtDecode } from "jwt-decode";
+import { FaUser, FaLock } from "react-icons";
+
+import "./Login.css";
 
 // localStorage.clear();
 function Login({ setIsLoggedIn, setProfile }) {
   setIsLoggedIn("false");
   const history = useNavigate();
-  document.body.style = "background: #B3FFCC";
+  // document.body.style = "background: #B3FFCC";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,32 +42,48 @@ function Login({ setIsLoggedIn, setProfile }) {
   }
 
   return (
-    <div className="login">
-      <h1>Login</h1>
+    <div className="login_container">
+      <form action="" className="Form">
+        <h1>Login</h1>
+        <div className="input">
+          <input
+            type="text"
+            placeholder="Email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            required
+          />
+        </div>
+        <div className="input">
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            required
+          />
+        </div>
 
-      <form action="POST">
-        <input
-          type="email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          placeholder="Password"
-        />
-        <input type="submit" onClick={submit} />
+        <div className="forgot_password">
+          <label>
+            <input type="checkbox" />
+            Remember me
+          </label>
+          <a href="#">Forgot Password?</a>
+        </div>
+
+        <button type="submit" onClick={submit}>
+          Login
+        </button>
+
+        <div className="register">
+          <p>
+            Don't have an account? <Link to="/signup">Register</Link>
+          </p>
+        </div>
       </form>
-
-      <br />
-      <p>OR</p>
-      <br />
-
-      <Link to="/signup">Signup Page</Link>
     </div>
   );
 }
