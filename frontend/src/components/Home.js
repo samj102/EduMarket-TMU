@@ -9,7 +9,7 @@ function Home() {
   // const location = useLocation();
   // const [data, setData] = useState([]);
   // const decoded = jwtDecode(location.state.token);
-  document.body.style = "background: #B3FFCC";
+  // document.body.style = "background: #B3FFCC";
 
   const tok = localStorage.getItem("login");
   const decoded = jwtDecode(tok);

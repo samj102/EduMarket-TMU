@@ -21,7 +21,7 @@ import api from "../utils/api";
 
 function Users() {
   // document.body.backgroundColor = "#6AD8B1";
-  document.body.style = "background: #B3FFCC";
+  // document.body.style = "background: #B3FFCC";
   const location = useLocation();
   const [data, setData] = useState([]);
 
