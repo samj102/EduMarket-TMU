@@ -22,12 +22,16 @@ const postModel = require("../models/postModel");
 
 
 //To add a new post in the database
-router.post("/",upload.single('image'),async function (req, res, next) {
+router.post("/",upload.array('image', 20),async function (req, res, next) {
   try {
+        const uploadedImages = [];
+        for (const image of req.files) {
+        uploadedImages.push(image.path); 
+    }
     const newPost = new postModel({
         title: req.body.title,
         description: req.body.description,
-        image: req.file.path,
+        image: uploadedImages,
         name_of_post_person: req.body.name_of_post_person,
         price: req.body.price,
         category: req.body.category
