@@ -5,17 +5,26 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
+  Image: {
+    type: String,
+    required: true,
+  },
   name_of_post_person : {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'userModel',
     required: true,
   },
   price: {
-    type: float,
+    type: Number,
     required: true,
   },
   category: {
     type: String,
+    enum: ["academic services", "items wanted", "items for sale"],
     required: true,
   },
 });
