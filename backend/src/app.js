@@ -6,6 +6,7 @@ const cors = require("cors");
 
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
+const adRouter = require("./routes/ad");
 const connectDB = require("../config/db");
 const { authenticateUserToken } = require("./middleware");
 
@@ -28,9 +29,9 @@ app.use(cookieParser());
 // routes
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+app.use("/ad", adRouter);
 connectDB();
 
-// catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
