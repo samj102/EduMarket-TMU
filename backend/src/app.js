@@ -3,6 +3,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const path = require("path");
 
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
@@ -25,6 +26,9 @@ app.use(logger("dev")); //logs requests
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//To get the images uploaded by the user for the ads
+app.use("/uploads", express.static(path.join(__dirname, '../uploads')));
 
 // routes
 app.use("/auth", authRouter);

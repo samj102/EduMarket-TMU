@@ -2,6 +2,17 @@ const express = require("express");
 const userModel = require("../models/postModel");
 const router = express.Router();
 const createError = require("http-errors");
+const multer = require("multer");
+const path = require('path');
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, 'uploads/');
+    },
+    filename: function(req, file, cb) {
+      cb(null, Date.now() + path.extname(file.originalname)); 
+    }
+  });
+const upload = multer({ storage: storage });
 const {
   authenticateAdminToken,
   authenticateOwnerToken,
@@ -9,13 +20,14 @@ const {
 } = require("../middleware");
 const postModel = require("../models/postModel");
 
+
 //To add a new post in the database
-router.post("/",async function (req, res, next) {
+router.post("/",upload.single('image'),async function (req, res, next) {
   try {
     const newPost = new postModel({
         title: req.body.title,
         description: req.body.description,
-        image: req.body.image,
+        image: req.file.path,
         name_of_post_person: req.body.name_of_post_person,
         price: req.body.price,
         category: req.body.category
