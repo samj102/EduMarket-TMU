@@ -64,6 +64,16 @@ router.put("/:id",async function (req, res, next) {
     }
   );
 
+//To get all the ads from the database
+router.get("/", async function (req, res, next) {
+    try {
+      const posts = await userModel.find({});
+      res.status(200).json(posts);
+    } catch (error) {
+      next(createError(500, error.message));
+    }
+  });
+
 //To delete an ad from the database
 router.delete("/:id",async function (req, res, next) {
       try {
