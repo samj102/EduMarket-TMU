@@ -4,7 +4,7 @@ import Login from "./components/Login.js";
 import Signup from "./components/Signup.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Navbar from "./components/Navbar.js";
+// import Navbar from "./components/Navbar.js";
 import "bootstrap/dist/css/bootstrap.css";
 import Users from "./components/Users.js";
 import Logout from "./components/Logout.js";
@@ -13,6 +13,7 @@ import UploadItemPage from "./components/itemsForSale.js";
 import AcademicServicesPage from "./components/AcademicServices.js";
 import ContactUsPage from "./components/ContactUs.js";
 import EditProfile from "./components/EditProfile.js";
+import Container from "./reusable/container.js";
 
 function App() {
   const [isLoggedin, setisLoggedin] = useState("false");
@@ -30,35 +31,44 @@ function App() {
         src={require("./components/advistaLogo.png")}
         alt="Logo"
       /> */}
+
       <Router>
-        {isLoggedin === "true" && <Navbar />}
-        <Routes>
-          <Route
-            path="/login"
-            element={
-              <Login setIsLoggedIn={setisLoggedin} setProfile={setProfile} />
-            }
-          />
-          <Route
-            path="/signup"
-            element={<Signup setIsLoggedIn={setisLoggedin} />}
-          />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/items-wanted" element={<Home />} />
-          <Route path="/items-for-sale" element={<Home />} />
-          <Route path="/academic-services" element={<Home />} />
-          <Route path="/all-users" element={<Users />} />
-          <Route path="/ToS" element={<ToS />} />
-          <Route path="/About_Us" element={<AboutUsPage />} />
-          <Route path="/itemsForSale" element={<UploadItemPage />} />
-          <Route path="/AcademicServices" element={<AcademicServicesPage />} />
-          <Route path="/ContactUs" element={<ContactUsPage />} />
-          <Route
-            path="/edit-profile"
-            element={<EditProfile profile={profile} setProfile={setProfile} />}
-          />
-        </Routes>
+        {/* {isLoggedin === "true" && <Navbar />} */}
+        {isLoggedin === "true"}
+        <Container>
+          <Routes>
+            <Route
+              path="/login"
+              element={
+                <Login setIsLoggedIn={setisLoggedin} setProfile={setProfile} />
+              }
+            />
+            <Route
+              path="/signup"
+              element={<Signup setIsLoggedIn={setisLoggedin} />}
+            />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/items-wanted" element={<Home />} />
+            <Route path="/items-for-sale" element={<Home />} />
+            <Route path="/academic-services" element={<Home />} />
+            <Route path="/all-users" element={<Users />} />
+            <Route path="/ToS" element={<ToS />} />
+            <Route path="/About_Us" element={<AboutUsPage />} />
+            <Route path="/itemsForSale" element={<UploadItemPage />} />
+            <Route
+              path="/AcademicServices"
+              element={<AcademicServicesPage />}
+            />
+            <Route path="/ContactUs" element={<ContactUsPage />} />
+            <Route
+              path="/edit-profile"
+              element={
+                <EditProfile profile={profile} setProfile={setProfile} />
+              }
+            />
+          </Routes>
+        </Container>
       </Router>
     </div>
   );
