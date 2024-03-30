@@ -13,9 +13,9 @@ const postSchema = new mongoose.Schema({
     type: [String],
     required: true,
   },
-  name_of_post_person : {
+  post_person_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'userModel',
+    ref: "user",
     required: true,
   },
   price: {
@@ -32,4 +32,3 @@ const postSchema = new mongoose.Schema({
 const postModel = mongoose.model("post", postSchema);
 
 module.exports = postModel;
-
