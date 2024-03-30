@@ -17,7 +17,7 @@
 }
 
 .Form h1 {
-    font-size: 36px;
+    font-size: 26px;
     text-align: center;
 }
 
@@ -87,14 +87,14 @@
 .Form button {
     width:100%;
     height:45px;
-    background: #000;
+    background: #5fa180;
     border:none;
     outline:none;
     border-radius: 40px;
     box-shadow: 0 0 10px rgba(0,0,0,.1);
     cursor: pointer;
     font-size: 16px;
-    color:#5fa180;
+    color:white;
     font-weight:700
 }
 

@@ -38,49 +38,62 @@ function Login({ setIsLoggedIn, setProfile }) {
   }
 
   return (
-    <div className="login_container">
-      <form action="" className="Form">
-        <h1>Login</h1>
-        <div className="input">
-          <input
-            type="text"
-            placeholder="Email"
-            onChange={(e) => {
-              setEmail(e.target.value);
+    <>
+      <div className="login_container">
+        <form action="" className="Form">
+          <img
+            src="./advista-logo.png"
+            style={{
+              width: "65%",
+              display: "block",
+              marginLeft: "auto",
+              marginRight: "auto",
             }}
-            required
-          />
-        </div>
-        <div className="input">
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            required
-          />
-        </div>
+            alt="logo"
+            className="profile"
+          ></img>
+          {/* <h1>Login</h1> */}
+          <div className="input">
+            <input
+              type="text"
+              placeholder="Email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              required
+            />
+          </div>
+          <div className="input">
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              required
+            />
+          </div>
 
-        <div className="forgot_password">
-          <label>
-            <input type="checkbox" />
-            Remember me
-          </label>
-          <a href="#">Forgot Password?</a>
-        </div>
+          <div className="forgot_password">
+            <label>
+              <input type="checkbox" />
+              Remember me
+            </label>
+            <a href="#">Forgot Password?</a>
+          </div>
 
-        <button type="submit" onClick={submit}>
-          Login
-        </button>
+          <button type="submit" onClick={submit}>
+            Login
+          </button>
 
-        <div className="register">
-          <p>
-            Don't have an account? <Link to="/signup">Register</Link>
-          </p>
-        </div>
-      </form>
-    </div>
+          <div className="register">
+            <p>
+              Don't have an account? <Link to="/signup">Register</Link>
+            </p>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 
