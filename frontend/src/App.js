@@ -15,6 +15,7 @@ import Users from "./components/Users.js";
 import Logout from "./components/Logout.js";
 import AboutUsPage from "./components/AboutUs.js";
 import UploadItemPage from "./components/itemsForSale.js";
+import ItemsWanted from "./components/itemsWanted.js";
 import AcademicServicesPage from "./components/AcademicServices.js";
 import ContactUsPage from "./components/ContactUs.js";
 import EditProfile from "./components/EditProfile.js";
@@ -60,8 +61,7 @@ function App() {
             <Route path="/ToS" element={<ToS />} />
             <Route path="/About_Us" element={<AboutUsPage />} />
             <Route path="/itemsForSale" element={<UploadItemPage />} />
-            <Route path="/itemsWanted" element={<UploadItemPage />} />{" "}
-            {/*Change this once Items Wanted pg is up*/}
+            <Route path="/itemsWanted" element={<ItemsWanted />} />
             <Route path="/privacyPolicy" element={<ToS />} />{" "}
             {/*Change this once Provacy Policy pg is up*/}
             <Route
