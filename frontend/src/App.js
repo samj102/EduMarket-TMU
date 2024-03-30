@@ -2,7 +2,12 @@ import ToS from "./components/ToS.js";
 import Home from "./components/Home.js";
 import Login from "./components/Login.js";
 import Signup from "./components/Signup.js";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import { useState, useEffect } from "react";
 // import Navbar from "./components/Navbar.js";
 import "bootstrap/dist/css/bootstrap.css";
@@ -13,7 +18,8 @@ import UploadItemPage from "./components/itemsForSale.js";
 import AcademicServicesPage from "./components/AcademicServices.js";
 import ContactUsPage from "./components/ContactUs.js";
 import EditProfile from "./components/EditProfile.js";
-import Container from "./reusable/container.js";
+import Header from "./reusable/header.js";
+import Footer from "./reusable/footer.js";
 
 function App() {
   const [isLoggedin, setisLoggedin] = useState("false");
@@ -34,9 +40,10 @@ function App() {
 
       <Router>
         {/* {isLoggedin === "true" && <Navbar />} */}
-        {isLoggedin === "true"}
-        <Container>
+        {isLoggedin === "true" && <Header />}
+        <div style={{ minHeight: "80vh" }}>
           <Routes>
+            <Route path="/" element={<Navigate to="/login" />} />
             <Route
               path="/login"
               element={
@@ -49,13 +56,14 @@ function App() {
             />
             <Route path="/logout" element={<Logout />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/items-wanted" element={<Home />} />
-            <Route path="/items-for-sale" element={<Home />} />
-            <Route path="/academic-services" element={<Home />} />
             <Route path="/all-users" element={<Users />} />
             <Route path="/ToS" element={<ToS />} />
             <Route path="/About_Us" element={<AboutUsPage />} />
             <Route path="/itemsForSale" element={<UploadItemPage />} />
+            <Route path="/itemsWanted" element={<UploadItemPage />} />{" "}
+            {/*Change this once Items Wanted pg is up*/}
+            <Route path="/privacyPolicy" element={<ToS />} />{" "}
+            {/*Change this once Provacy Policy pg is up*/}
             <Route
               path="/AcademicServices"
               element={<AcademicServicesPage />}
@@ -68,7 +76,8 @@ function App() {
               }
             />
           </Routes>
-        </Container>
+        </div>
+        {isLoggedin === "true" && <Footer />}
       </Router>
     </div>
   );
