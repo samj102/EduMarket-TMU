@@ -15,9 +15,9 @@ const EditProfile = ({ profile, setProfile }) => {
 
   async function updateUser() {
     if (
-      (name == profile.name && email == profile.email) ||
-      name == "" ||
-      email == ""
+      (name === profile.name && email === profile.email) ||
+      name === "" ||
+      email === ""
     ) {
       alert(
         "You cannot update to the same Name and Email or keep any field empty"
@@ -26,7 +26,6 @@ const EditProfile = ({ profile, setProfile }) => {
       await api.put(`user/update/${profile.id}`, { name: name, email: email });
       setProfile({ id: profile.id, name: name, email: email });
       alert("Profile updated successfully");
-      // window.location.href = "http://localhost:3000/home";
     }
   }
 

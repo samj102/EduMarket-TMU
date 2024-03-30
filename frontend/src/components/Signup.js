@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -20,12 +20,11 @@ function Signup({ setIsLoggedIn }) {
           password: password,
         })
         .then((res) => {
-          if (res.status == 200) {
-            // console.log(res.data);
+          if (res.status === 200) {
             setIsLoggedIn("true");
             localStorage.setItem("login", res.data.token);
             history("/home", { state: { id: email, token: res.data.token } });
-          } else if (res.status == 409) {
+          } else if (res.status === 409) {
             alert("User already exists");
           }
 
@@ -34,7 +33,7 @@ function Signup({ setIsLoggedIn }) {
           history("/home", { state: { id: email, token: res.data.token } });
         })
         .catch((e) => {
-          if (e.response.status == 409) alert("User already exists");
+          if (e.response.status === 409) alert("User already exists");
           console.log(e);
         });
     } catch (e) {

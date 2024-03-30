@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../utils/api";
 import { jwtDecode } from "jwt-decode";
-import { FaUser, FaLock } from "react-icons";
 
 import "./Login.css";
 
@@ -11,13 +10,10 @@ import "./Login.css";
 function Login({ setIsLoggedIn, setProfile }) {
   setIsLoggedIn("false");
   const history = useNavigate();
-  // document.body.style = "background: #B3FFCC";
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   async function submit(e) {
     e.preventDefault();
-    // console.log("hel");
     try {
       const res = await axios.post("http://localhost:8080/auth/login", {
         email: email,
@@ -33,7 +29,7 @@ function Login({ setIsLoggedIn, setProfile }) {
         const { data } = await api.get(`/user/${decoded.id}`);
         setProfile({ email: data.email, name: data.name, id: data._id });
         history("/home", { state: { id: email, token: token } });
-      } else if (res.status == 401) {
+      } else if (res.status === 401) {
         alert("User has not sign up");
       }
     } catch (e) {

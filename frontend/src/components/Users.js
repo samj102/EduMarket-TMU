@@ -1,27 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, userNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import axios from "axios";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import api from "../utils/api";
 
-// function deleteUser(id, name) {
-//   if (window.confirm(`Are you sure you want to delete ${name}`)) {
-//     fetch(`http://localhost:8080/user/delete/${id}`, {
-//       method: "DELETE",
-//     })
-//       .then((res) => res.json())
-//       .then((data) => {
-//         console.log(data.data);
-//       });
-//   } else {
-//   }
-// }
-
 function Users() {
-  // document.body.backgroundColor = "#6AD8B1";
-  // document.body.style = "background: #B3FFCC";
   const location = useLocation();
   const [data, setData] = useState([]);
 
@@ -44,7 +28,7 @@ function Users() {
     const decoded = jwtDecode(tok);
     console.log(data);
     console.log(decoded);
-    if (decoded.role == "admin") {
+    if (decoded.role === "admin") {
       return (
         <>
           <h1>List of Users currently signed up:</h1>
@@ -79,21 +63,6 @@ function Users() {
                 </tr>
               ))}
             </table>
-
-            {/* {data.map((dt) => (
-            <div>
-              <h1>
-                {dt.name}{" "}
-                <FontAwesomeIcon
-                  icon={faTrash}
-                  onClick={() => deleteUser(dt._id, dt.name)}
-                />
-              </h1>
-              <h3>{dt.role}</h3>
-              <div>
-              </div>
-            </div>
-          ))} */}
           </div>
         </>
       );
