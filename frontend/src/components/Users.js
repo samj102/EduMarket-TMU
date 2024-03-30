@@ -31,14 +31,23 @@ function Users() {
     if (decoded.role === "admin") {
       return (
         <>
-          <h1>List of Users currently signed up:</h1>
+          <h1 style={{ textAlign: "center" }}>List of Users</h1>
           <div
             className="homepage"
-            style={{ display: "flex", alignItems: "center" }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              padding: "10px",
+            }}
           >
             <table
               style={{
-                width: 500,
+                width: 700,
+                height: 500,
                 border: "1px solid",
                 backgroundColor: "white",
               }}
