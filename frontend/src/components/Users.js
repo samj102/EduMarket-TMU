@@ -1,37 +1,70 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, userNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import api from "../utils/api";
 
 function Users() {
   const location = useLocation();
   const [data, setData] = useState([]);
 
-  //1.Get the token from history    2.Decode the token         3.Is admin?            4.If admin call server with auth as a token.
-
-  //   history("/users", { state: { id: email, token: res.data.token } });
+  async function deleteUser(id, name) {
+    if (window.confirm(`Are you sure you want to delete ${name}`)) {
+      await api.delete(`user/delete/${id}`);
+      const { data } = await api.get("/user");
+      setData(data);
+    } else {
+    }
+  }
 
   //   Fetching users from the backend server
   useEffect(() => {
-    fetch("http://localhost:3000/users")
-      .then((res) => res.json())
-      .then((data) => setData(data));
+    api.get("/user").then(({ data }) => setData(data));
   }, []);
   try {
     const tok = localStorage.getItem("login");
+    console.log(tok);
     const decoded = jwtDecode(tok);
+    console.log(data);
     console.log(decoded);
-    if (decoded.role == "admin") {
+    if (decoded.role === "admin") {
       return (
-        <div className="homepage">
+        <>
           <h1>List of Users currently signed up:</h1>
-
-          {data.map((dt) => (
-            <div>
-              <h1>{dt.email}</h1>
-              <h3>{dt.role}</h3>
-            </div>
-          ))}
-        </div>
+          <div
+            className="homepage"
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <table
+              style={{
+                width: 500,
+                border: "1px solid",
+                backgroundColor: "white",
+              }}
+            >
+              <tr style={{ textAlign: "center", border: "1px solid" }}>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Delete</th>
+              </tr>
+              {data.map((dt) => (
+                <tr style={{ textAlign: "center", border: "1px solid" }}>
+                  <td>{dt.name}</td>
+                  <td>{dt.email}</td>
+                  <td>{dt.role}</td>
+                  <td>
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      onClick={() => deleteUser(dt._id, dt.name)}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </table>
+          </div>
+        </>
       );
     } else {
       return (
@@ -44,7 +77,7 @@ function Users() {
     }
   } catch (error) {
     alert("Please login");
-    window.location.href = "http://localhost:3001/login";
+    window.location.href = "http://localhost:3000/login";
   }
 }
 

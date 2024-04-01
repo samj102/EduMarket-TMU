@@ -1,69 +1,85 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import api from "../utils/api";
+import { jwtDecode } from "jwt-decode";
 
-function Login({ setIsLoggedIn }) {
+import "./Login.css";
+
+// localStorage.clear();
+function Login({ setIsLoggedIn, setProfile }) {
   setIsLoggedIn("false");
   const history = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  localStorage.clear();
-  function submit(e) {
+  async function submit(e) {
     e.preventDefault();
-    // console.log("hel");
     try {
-      axios
-        .post("http://localhost:8080/auth/login", {
-          email: email,
-          password: password,
-        })
-        .then((res) => {
-          if (res.status == 200) {
-            // console.log(res.data);
-            setIsLoggedIn("true");
-            localStorage.setItem("login", res.data.token);
-            history("/home", { state: { id: email, token: res.data.token } });
-          } else if (res.status == 401) {
-            alert("User has not sign up");
-          }
-        })
-        .catch((e) => {
-          alert("wrong details");
-          console.log(e);
-        });
+      const res = await axios.post("http://localhost:8080/auth/login", {
+        email: email,
+        password: password,
+      });
+      const token = await res.data.token;
+      console.log(token);
+      if (token) {
+        setIsLoggedIn("true");
+        localStorage.setItem("login", token);
+        document.cookie = `access_token=${token}`;
+        const decoded = jwtDecode(JSON.stringify(token));
+        const { data } = await api.get(`/user/${decoded.id}`);
+        setProfile({ email: data.email, name: data.name, id: data._id });
+        history("/home", { state: { id: email, token: token } });
+      } else if (res.status === 401) {
+        alert("User has not sign up");
+      }
     } catch (e) {
       console.log(e);
     }
   }
 
   return (
-    <div className="login">
-      <h1>Login</h1>
+    <div className="login_container">
+      <form action="" className="Form">
+        <h1>Login</h1>
+        <div className="input">
+          <input
+            type="text"
+            placeholder="Email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            required
+          />
+        </div>
+        <div className="input">
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            required
+          />
+        </div>
 
-      <form action="POST">
-        <input
-          type="email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          placeholder="Password"
-        />
-        <input type="submit" onClick={submit} />
+        <div className="forgot_password">
+          <label>
+            <input type="checkbox" />
+            Remember me
+          </label>
+          <a href="#">Forgot Password?</a>
+        </div>
+
+        <button type="submit" onClick={submit}>
+          Login
+        </button>
+
+        <div className="register">
+          <p>
+            Don't have an account? <Link to="/signup">Register</Link>
+          </p>
+        </div>
       </form>
-
-      <br />
-      <p>OR</p>
-      <br />
-
-      <Link to="/signup">Signup Page</Link>
     </div>
   );
 }
