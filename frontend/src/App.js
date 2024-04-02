@@ -67,7 +67,6 @@ function App() {
             <Route path="/sell" element={<FormComponent />} />
             <Route path="/itemsWanted" element={<ItemsWanted />} />
             <Route path="/privacyPolicy" element={<PrivacyPolicy />} />{" "}
-            {/*Change this once Provacy Policy pg is up*/}
             <Route
               path="/AcademicServices"
               element={<AcademicServicesPage />}

@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Container, Grid, Card, CardContent, Typography, CardMedia, Button } from "@mui/material";
+import { Container, Grid, Card, CardContent, Typography, CardMedia, Button, TextField } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import api from "../utils/api";
 
 const ItemsForSale = () => {
     const [items, setItems] = useState([]);
     const navigate = useNavigate();
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value.toLowerCase());
+    };
+
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -17,15 +23,28 @@ const ItemsForSale = () => {
 
             }
         };
-
         fetchItems();
     }, []);
+
+
+    const filteredItems = items.filter(item =>
+        (item.title.toLowerCase().includes(searchQuery) ||
+            item.description.toLowerCase().includes(searchQuery)) &&
+        item.category.includes("sale")
+    );
 
     return (
         <Container maxWidth="lg" style={{ marginTop: "20px" }}>
             <Typography variant="h2" gutterBottom>
                 Items for Sale
             </Typography>
+            <TextField
+                fullWidth
+                label="Search Items"
+                variant="outlined"
+                onChange={handleSearchChange}
+                style={{ marginBottom: '20px' }}
+            />
             <Button
                 variant="contained"
                 color="primary"
@@ -35,7 +54,7 @@ const ItemsForSale = () => {
                 Sell Your Item
             </Button>
             <Grid container spacing={3}>
-                {items.map((item) => (
+                {filteredItems.map((item) => (
                     <Grid item xs={12} sm={6} md={4} key={item._id}>
                         <Card>
                             <CardMedia
@@ -46,7 +65,7 @@ const ItemsForSale = () => {
                             />
                             <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
-                                    {item.name}
+                                    {item.title}
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
                                     {item.description}
