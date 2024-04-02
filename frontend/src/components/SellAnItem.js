@@ -79,7 +79,7 @@ const FormComponent = ({ postPersonId }) => {
                     <Grid item xs={12}>
                         <TextField
                             fullWidth
-                            label="Price"
+                            label="Price(if applicable)"
                             name="price"
                             value={formData.price}
                             onChange={handleChange}
