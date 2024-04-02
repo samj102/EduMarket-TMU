@@ -28,7 +28,7 @@ router.get("/:id", authenticateOwnerToken, async function (req, res, next) {
     if (error.kind === "ObjectId") {
       next(createError(404, "User not found"));
     } else {
-      next(createError(500, "Failed attempt"));
+      next(createError(500, error.message));
     }
   }
 });
@@ -55,7 +55,7 @@ router.put(
       if (error.kind === "ObjectId") {
         next(createError(404, "User not found"));
       } else {
-        next(createError(500, "Failed attempt"));
+        next(createError(500, error.message));
       }
     }
   }
@@ -75,7 +75,7 @@ router.delete(
       if (error.kind === "ObjectId") {
         next(createError(404, "User not found"));
       } else {
-        next(createError(500, "Failed attempt"));
+        next(createError(500, error.message));
       }
     }
   }
