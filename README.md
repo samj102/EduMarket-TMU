@@ -79,3 +79,37 @@ Request body:
   "password": "<password>"
 }
 ```
+
+#### GET /user
+
+Displays all the users in the database
+
+#### GET /user/:id
+
+Display a user with the specific id
+
+#### PUT /user/update/:id
+
+Updates the information of the specific user
+
+#### DELETE /user/delete/:id
+
+Deletes the specific user from the database
+
+#### POST /ad
+
+Adds a new post to the database
+
+'''Form-data'''
+
+#### PUT /ad/:id
+
+Updates the post of the specific user
+
+#### GET /ad
+
+Displays all the posts in the database
+
+#### DELETE /ad/delete/:id
+
+Deletes the post from a specific user
