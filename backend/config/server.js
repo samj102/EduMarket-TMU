@@ -7,6 +7,7 @@
 const app = require("../src/app");
 const debug = require("debug")("project:server");
 const http = require("http");
+const webSocket = require("ws");
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +21,29 @@ app.set("port", port);
  */
 
 const server = http.createServer(app);
+
+const connections = {};
+const wss = new webSocket.Server({ server });
+wss.on("connection", function connection(ws) {
+  ws.on("message", function incoming(message) {
+    if (typeof message === "string") {
+      let key = message;
+      connections[key] = ws;
+    } else {
+      message = JSON.parse(message);
+      const receiver = connections[message.receiver];
+      if (receiver) {
+        receiver.send(JSON.stringify(message));
+      }
+    }
+  });
+  ws.on("close", () => {
+    const user_id = Object.keys(connections).find(
+      (key) => connections[key] === ws
+    );
+    delete connections[user_id];
+  });
+});
 
 /**
  * Listen on provided port, on all network interfaces.
