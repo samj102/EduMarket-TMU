@@ -62,7 +62,7 @@ function App() {
             <Route path="/About_Us" element={<AboutUsPage />} />
             <Route path="/itemsForSale" element={<UploadItemPage />} />
             <Route path="/itemsWanted" element={<ItemsWanted />} />
-            <Route path="/privacyPolicy" element={<ToS />} />{" "}
+            <Route path="/privacyPolicy" element={<PrivacyPolicy />} />{" "}
             {/*Change this once Provacy Policy pg is up*/}
             <Route
               path="/AcademicServices"
@@ -75,6 +75,7 @@ function App() {
                 <EditProfile profile={profile} setProfile={setProfile} />
               }
             />
+            <Route path="/chat" element={<Chats />} />
           </Routes>
         </div>
         {isLoggedin === "true" && <Footer />}
