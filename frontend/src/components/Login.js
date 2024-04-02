@@ -3,7 +3,8 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../utils/api";
 import { jwtDecode } from "jwt-decode";
-import "./Login.css";
+
+import "../styles/Login.css";
 
 // localStorage.clear();
 function Login({ setIsLoggedIn, setProfile }) {
@@ -19,8 +20,6 @@ function Login({ setIsLoggedIn, setProfile }) {
         password: password,
       });
       const token = await res.data.token;
-      console.log("token");
-      console.log(res.data.token);
       console.log(token);
       if (token) {
         setIsLoggedIn("true");
@@ -34,7 +33,7 @@ function Login({ setIsLoggedIn, setProfile }) {
         alert("User has not sign up");
       }
     } catch (e) {
-      alert(e.message);
+      console.log(e);
     }
   }
 

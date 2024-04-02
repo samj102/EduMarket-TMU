@@ -22,7 +22,8 @@ import EditProfile from "./components/EditProfile.js";
 import Header from "./reusable/header.js";
 import Footer from "./reusable/footer.js";
 import FormComponent from "./components/SellAnItem.js";
-
+import PrivacyPolicy from "./components/PrivacyPolicy.js";
+import Chats from "./components/Chats.js";
 
 function App() {
   const [isLoggedin, setisLoggedin] = useState("false");

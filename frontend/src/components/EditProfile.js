@@ -12,7 +12,7 @@ import api from "../utils/api";
 const EditProfile = ({ profile, setProfile }) => {
   const [name, setName] = useState(profile.name);
   const [email, setEmail] = useState(profile.email);
-
+  console.log(profile);
   async function updateUser() {
     if (
       (name === profile.name && email === profile.email) ||

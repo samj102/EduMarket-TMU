@@ -78,6 +78,9 @@ function Header() {
                   <li>
                     <Link to="/About_Us">About Us</Link>
                   </li>
+                  <li>
+                    <Link to="/chat">Messages</Link>
+                  </li>
                   <li
                     className="nav-links"
                     aria-controls="basic-menu"
