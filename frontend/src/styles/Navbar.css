@@ -1,0 +1,17 @@
+.navbar_menu{
+    list-style: none;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Forum";
+    position:sticky;
+}
+
+.navbar_menu li{
+    margin:0px 20px;
+}
+
+.navbar_menu li a{
+    text-decoration: none;
+    color: white
+}
