@@ -23,14 +23,13 @@ const ItemsForSale = () => {
 
             }
         };
-
         fetchItems();
     }, []);
 
-        
-    const filteredItems = items.filter(item => 
-        (item.title.toLowerCase().includes(searchQuery) || 
-        item.description.toLowerCase().includes(searchQuery) ) && 
+
+    const filteredItems = items.filter(item =>
+        (item.title.toLowerCase().includes(searchQuery) ||
+            item.description.toLowerCase().includes(searchQuery)) &&
         item.category.includes("sale")
     );
 

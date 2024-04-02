@@ -41,7 +41,7 @@ const PrivacyPolicy = () => {
                 You have the right to access, update, or delete your personal information at any time. You can also choose to opt-out of certain communications or features.
             </Typography>
             <Typography variant="body1" paragraph>
-                If you have any questions or concerns about our Privacy Policy or practices, please contact us at [contact email].
+                If you have any questions or concerns about our Privacy Policy or practices, please contact us at AdVista@gmail.com.
             </Typography>
         </Container>
     );
