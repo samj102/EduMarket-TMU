@@ -7,6 +7,7 @@ const path = require("path");
 
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
+const chatRouter = require("./routes/chat");
 const adRouter = require("./routes/ad");
 const connectDB = require("../config/db");
 
@@ -33,6 +34,7 @@ app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/ad", adRouter);
+app.use("/chat", chatRouter);
 connectDB();
 
 app.use(function (req, res, next) {
