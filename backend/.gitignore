@@ -5,6 +5,11 @@ node_modules/
 # Ignore .env
 .env
 
+uploads/*
+
+!uploads/.gitkeep
+
+*.DS_Store
 
 
 

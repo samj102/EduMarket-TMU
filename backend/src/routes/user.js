@@ -1,5 +1,6 @@
 const express = require("express");
 const userModel = require("../models/userModel");
+const postModel = require("../models/postModel");
 const router = express.Router();
 const createError = require("http-errors");
 const {
@@ -67,6 +68,7 @@ router.delete(
   async function (req, res, next) {
     try {
       const { id } = req.params;
+      await postModel.deleteMany({ post_person_id: id });
       const users = await userModel.findByIdAndDelete(id);
       res.status(200).json(users);
     } catch (error) {

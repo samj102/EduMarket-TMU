@@ -8,7 +8,11 @@ function authenticateOwnerToken(req, res, next) {
   if (!token) return res.sendStatus(401);
   jwt.verify(token, secretKey, (err, user) => {
     if (err) return next(createError(403));
-    if (user.id !== req.params.id && user.role !== "admin")
+    if (
+      user.id !== req.params.id &&
+      user.id !== req.body.post_person_id &&
+      user.role !== "admin"
+    )
       return next(createError(403));
     next();
   });
