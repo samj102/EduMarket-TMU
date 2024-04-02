@@ -5,7 +5,7 @@ node_modules/
 # Ignore .env
 .env
 
-uploads/
+uploads/*
 
 *.DS_Store
 
