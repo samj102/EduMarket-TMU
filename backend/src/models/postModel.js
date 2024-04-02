@@ -27,7 +27,7 @@ const postSchema = new mongoose.Schema({
     enum: ["academic services", "items wanted", "items for sale"],
     required: true,
   },
-});
+}, { timestamps: true });
 
 const postModel = mongoose.model("post", postSchema);
 
