@@ -21,6 +21,9 @@ import ContactUsPage from "./components/ContactUs.js";
 import EditProfile from "./components/EditProfile.js";
 import Header from "./reusable/header.js";
 import Footer from "./reusable/footer.js";
+import FormComponent from "./components/SellAnItem.js";
+import PrivacyPolicy from "./components/privacyPolicy.js";
+
 
 function App() {
   const [isLoggedin, setisLoggedin] = useState("false");
@@ -61,9 +64,9 @@ function App() {
             <Route path="/ToS" element={<ToS />} />
             <Route path="/About_Us" element={<AboutUsPage />} />
             <Route path="/itemsForSale" element={<UploadItemPage />} />
+            <Route path="/sell" element={<FormComponent />} />
             <Route path="/itemsWanted" element={<ItemsWanted />} />
-            <Route path="/privacyPolicy" element={<ToS />} />{" "}
-            {/*Change this once Provacy Policy pg is up*/}
+            <Route path="/privacyPolicy" element={<PrivacyPolicy />} />{" "}
             <Route
               path="/AcademicServices"
               element={<AcademicServicesPage />}
