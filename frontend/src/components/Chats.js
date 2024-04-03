@@ -7,6 +7,7 @@ import Messages from "./Messages.js";
 const Chats = ({ profile }) => {
   const [chat, setChat] = useState("");
   const [userData, setUserData] = useState([]);
+  const [userName, setUserName] = useState("");
   async function getChats() {
     const { data } = await api.get(`/user/66086232ee857d1420a320b7`);
     console.log(data);
@@ -39,16 +40,29 @@ const Chats = ({ profile }) => {
       <div className="Left-side-chat">
         <div className="Chat-container">
           <h2>Chats</h2>
+          <hr
+            style={{
+              width: "95%",
+              border: "0.1px solid #414a4c",
+              marginTop: "7px",
+            }}
+          />
           <div className="Chat-list">
             {userData.map((data) => {
-              return <Conversation data={data} setChat={setChat} />;
+              return (
+                <Conversation
+                  data={data}
+                  setChat={setChat}
+                  setUserName={setUserName}
+                />
+              );
             })}
           </div>
         </div>
       </div>
 
       <div className="Right-side-chat">
-        {chat != "" && <Messages chat={chat} />}
+        {chat != "" && <Messages chat={chat} userName={userName} />}
       </div>
     </div>
   );

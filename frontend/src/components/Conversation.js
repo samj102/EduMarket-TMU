@@ -1,8 +1,14 @@
 import React from "react";
 
-const Conversation = ({ data, setChat }) => {
+const Conversation = ({ data, setChat, setUserName }) => {
   return (
-    <div className="follower conversation" onClick={() => setChat(data.chatID)}>
+    <div
+      className="follower conversation"
+      onClick={() => {
+        setChat(data.chatID);
+        setUserName(data.user.name);
+      }}
+    >
       <div>
         <div className="online-dot"></div>
         <img src="./default.png" style={{ width: "50px", height: "50px" }} />
