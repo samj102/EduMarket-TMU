@@ -20,6 +20,8 @@ const Messages = ({ chat, userName }) => {
   async function handleMessageClick() {
     const data = { sender: decoded.id, message: newMessage };
     await api.put(`/chat/${chat}`, data);
+    getMessages();
+    setNewMessage("");
   }
 
   async function getMessages() {
@@ -82,7 +84,6 @@ const Messages = ({ chat, userName }) => {
           })}
         </div>
         <div className="chat-sender">
-          <div>+</div>
           <InputEmoji value={newMessage} onChange={handleNewMessage} />
           <button className="button" onClick={handleMessageClick}>
             Send

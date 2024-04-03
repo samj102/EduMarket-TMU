@@ -3,13 +3,15 @@ import "../styles/Chats.css";
 import api from "../utils/api.js";
 import Conversation from "./Conversation.js";
 import Messages from "./Messages.js";
+import { jwtDecode } from "jwt-decode";
 
 const Chats = ({ profile }) => {
+  const decoded = jwtDecode(localStorage.getItem("login"));
   const [chat, setChat] = useState("");
   const [userData, setUserData] = useState([]);
   const [userName, setUserName] = useState("");
   async function getChats() {
-    const { data } = await api.get(`/user/66086232ee857d1420a320b7`);
+    const { data } = await api.get(`/user/${decoded.id}`);
     console.log(data);
     if (data) {
       let chatArr = [];
@@ -19,7 +21,7 @@ const Chats = ({ profile }) => {
       for (let i = 0; i < chatIDs.length; i++) {
         const res1 = await api.get(`/chat/${chatIDs[i]}`);
         console.log(res1.data);
-        if (res1.data.user_a._id === "66086232ee857d1420a320b7") {
+        if (res1.data.user_a._id === decoded.id) {
           chatArr.push({ user: res1.data.user_b, chatID: chatIDs[i] });
         } else {
           chatArr.push({ user: res1.data.user_a, chatID: chatIDs[i] });
