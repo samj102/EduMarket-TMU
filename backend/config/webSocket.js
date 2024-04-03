@@ -5,16 +5,17 @@ function webSocketServer(server) {
   const wss = new webSocket.Server({ server });
   wss.on("connection", function connection(ws) {
     ws.on("message", function incoming(message) {
-      if (typeof message === "string") {
-        let key = message;
-        connections[key] = ws;
-      } else {
-        message = JSON.parse(message);
+      message = JSON.parse(message);
+      console.log(message);
+      if (message.message) {
         const receiver = connections[message.receiver];
         if (receiver) {
           receiver.send(JSON.stringify(message));
         }
+      } else {
+        connections[message.my_user_id] = ws;
       }
+      console.log(connections);
     });
     ws.on("close", () => {
       const user_id = Object.keys(connections).find(
