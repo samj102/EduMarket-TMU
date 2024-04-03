@@ -22,7 +22,7 @@ import EditProfile from "./components/EditProfile.js";
 import Header from "./reusable/header.js";
 import Footer from "./reusable/footer.js";
 import FormComponent from "./components/SellAnItem.js";
-import PrivacyPolicy from "./components/PrivacyPolicy.js";
+import PrivacyPolicy from "./components/privacyPolicy.js";
 import Chats from "./components/Chats.js";
 
 function App() {
@@ -78,7 +78,7 @@ function App() {
                 <EditProfile profile={profile} setProfile={setProfile} />
               }
             />
-            <Route path="/chat" element={<Chats />} />
+            <Route path="/chat" element={<Chats profile={profile} />} />
           </Routes>
         </div>
         {isLoggedin === "true" && <Footer />}
