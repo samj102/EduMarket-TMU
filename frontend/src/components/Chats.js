@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../styles/Chats.css";
 import api from "../utils/api.js";
 import Conversation from "./Conversation.js";
+import Messages from "./Messages.js";
 
 const Chats = ({ profile }) => {
-  const [chats, setChats] = useState([]);
+  const [chat, setChat] = useState("");
   const [userData, setUserData] = useState([]);
   async function getChats() {
     const { data } = await api.get(`/user/66086232ee857d1420a320b7`);
@@ -18,9 +19,9 @@ const Chats = ({ profile }) => {
         const res1 = await api.get(`/chat/${chatIDs[i]}`);
         console.log(res1.data);
         if (res1.data.user_a._id === "66086232ee857d1420a320b7") {
-          chatArr.push(res1.data.user_b);
+          chatArr.push({ user: res1.data.user_b, chatID: chatIDs[i] });
         } else {
-          chatArr.push(res1.data.user_b);
+          chatArr.push({ user: res1.data.user_a, chatID: chatIDs[i] });
         }
       }
       setUserData(chatArr);
@@ -40,13 +41,15 @@ const Chats = ({ profile }) => {
           <h2>Chats</h2>
           <div className="Chat-list">
             {userData.map((data) => {
-              return <Conversation data={data} />;
+              return <Conversation data={data} setChat={setChat} />;
             })}
           </div>
         </div>
       </div>
 
-      <div className="Right-side-chat"></div>
+      <div className="Right-side-chat">
+        {chat != "" && <Messages chat={chat} />}
+      </div>
     </div>
   );
 };

@@ -1,9 +1,8 @@
 import React from "react";
 
-const Conversation = ({ data }) => {
-  console.log(data.name);
+const Conversation = ({ data, setChat }) => {
   return (
-    <div className="follower conversation">
+    <div className="follower conversation" onClick={() => setChat(data.chatID)}>
       <div>
         <div className="online-dot"></div>
         <img src="./default.png" style={{ width: "50px", height: "50px" }} />
@@ -15,7 +14,7 @@ const Conversation = ({ data }) => {
             marginLeft: "15px",
           }}
         >
-          {data.name}
+          {data.user.name}
         </span>
       </div>
     </div>
