@@ -10,6 +10,9 @@ function Login({ setIsLoggedIn, setProfile }) {
   const history = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  if (localStorage.getItem("login") !== null) {
+    history("/home");
+  }
   async function submit(e) {
     e.preventDefault();
     try {

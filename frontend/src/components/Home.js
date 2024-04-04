@@ -15,34 +15,10 @@ function Home() {
             <div className="part1 d-flex flex-column justify-content-center align-items-center">
               {/* <h1 data-aos="slide-right"> */}
               <h1>Welcome to AdVista, {decoded.email}</h1>
-              <div className="h-50">
-                <img
-                  src="./advista-logo.png"
-                  style={{
-                    background: "transparent",
-                    height: "300px",
-                    width: "300px",
-                  }}
-                ></img>
-              </div>
+              <div className="h-50"></div>
             </div>
           </div>
         </div>
-
-        {/* <div className="homepage">
-          <h3
-            style={{ fontFamily: "Brush Script MT", display: "inline-block" }}
-          >
-            Hello {decoded.email}, welcome to AdVista
-          </h3> */}
-        {/* 
-        {data.map((dt) => (
-          <div>
-            <h1>{dt.email}</h1>
-            <h3>{dt.role}</h3>
-          </div>
-        ))} */}
-        {/* </div> */}
       </>
     );
   } else {
