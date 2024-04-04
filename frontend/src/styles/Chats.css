@@ -222,12 +222,25 @@
   margin-right: 0px;
 }
   
-  
-  @media screen and (max-width: 768px) {
-   .Chat {
-      grid-template-columns: 16% auto;
+/* @media screen and (max-width: 768px) {
+  .Chat {
+     grid-template-columns: 16% auto;
+   }
+    .follower.conversation>div>.name{
+     display: none;
     }
-     .follower.conversation>div>.name{
-      display: none;
-     }
+ } */
+  
+.Chat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @media screen and (max-width: 768px) {
+    gap: 0.5rem; 
   }
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
+  }
+}
