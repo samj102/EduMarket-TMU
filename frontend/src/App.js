@@ -22,6 +22,7 @@ import Header from "./reusable/header.js";
 import Footer from "./reusable/footer.js";
 import FormComponent from "./components/SellAnItem.js";
 import PrivacyPolicy from "./components/PrivacyPolicy.js";
+import MyAds from "./components/MyAds.js";
 import Chats from "./components/Chats.js";
 import { jwtDecode } from "jwt-decode";
 
@@ -99,6 +100,13 @@ function App() {
               path="/edit-profile"
               element={
                 <EditProfile profile={profile} setProfile={setProfile} />
+              }
+            />
+            <Route
+              path="/MyAds"
+              element={
+                <MyAds />
+                // <EditProfile profile={profile} setProfile={setProfile} />
               }
             />
             <Route

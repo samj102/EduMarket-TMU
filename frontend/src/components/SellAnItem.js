@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Button, TextField, Typography, Container, Grid, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import api from '../utils/api';
+import { jwtDecode } from 'jwt-decode';
 
-const FormComponent = ({ postPersonId }) => {
+const FormComponent = () => {
+    const tok = localStorage.getItem("login");
+    const decode = jwtDecode(tok);
+
     const [formData, setFormData] = useState({
         title: '',
         description: '',
-        price: '',
+        price: 0,
         category: 'academic services',
-        post_person_id: '65fa541d5fd9176dbafe943a',
+        post_person_id: decode.id,
         images: []
     });
 
@@ -40,10 +44,10 @@ const FormComponent = ({ postPersonId }) => {
                 }
             });
             if (response.status === 200) {
-                console.log('Ad submitted successfully!');
+                alert('Ad submitted successfully!');
 
             } else {
-                console.error('Ad submission failed');
+                alert('Ad submission failed');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -63,6 +67,8 @@ const FormComponent = ({ postPersonId }) => {
                             value={formData.title}
                             onChange={handleChange}
                             variant="outlined"
+                            required={true}
+
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -75,6 +81,8 @@ const FormComponent = ({ postPersonId }) => {
                             variant="outlined"
                             multiline
                             rows={4}
+                            required={true}
+
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -85,6 +93,7 @@ const FormComponent = ({ postPersonId }) => {
                             value={formData.price}
                             onChange={handleChange}
                             variant="outlined"
+                            required={true}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -108,6 +117,7 @@ const FormComponent = ({ postPersonId }) => {
                             accept="image/*"
                             onChange={handleImageChange}
                             multiple
+                            required={true}
                         />
                     </Grid>
                     <Grid item xs={12}>
