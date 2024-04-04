@@ -102,6 +102,13 @@ function Header() {
                     </MenuItem>
                     <MenuItem
                       component={Link}
+                      to="/MyAds"
+                      onClick={handleClose}
+                    >
+                      My Ads
+                    </MenuItem>
+                    <MenuItem
+                      component={Link}
                       to="/logout"
                       onClick={handleClose}
                     >
@@ -170,6 +177,13 @@ function Header() {
                       onClick={handleClose}
                     >
                       Your Profile
+                    </MenuItem>
+                    <MenuItem
+                      component={Link}
+                      to="/MyAds"
+                      onClick={handleClose}
+                    >
+                      My Ads
                     </MenuItem>
                     <MenuItem
                       component={Link}

@@ -10,7 +10,7 @@ function authenticateOwnerToken(req, res, next) {
     if (err) return next(createError(403));
     if (
       user.id !== req.params.id &&
-      user.id !== req.body.post_person_id &&
+      user.id !== req.headers.post_person_id &&
       user.role !== "admin"
     )
       return next(createError(403));

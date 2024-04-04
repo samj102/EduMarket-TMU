@@ -23,6 +23,7 @@ import Header from "./reusable/header.js";
 import Footer from "./reusable/footer.js";
 import FormComponent from "./components/SellAnItem.js";
 import PrivacyPolicy from "./components/privacyPolicy.js";
+import MyAds from "./components/MyAds.js";
 
 
 function App() {
@@ -78,7 +79,15 @@ function App() {
                 <EditProfile profile={profile} setProfile={setProfile} />
               }
             />
+              <Route
+              path="/MyAds"
+              element={
+               <MyAds />
+                // <EditProfile profile={profile} setProfile={setProfile} />
+              }
+            />
           </Routes>
+
         </div>
         {isLoggedin === "true" && <Footer />}
       </Router>

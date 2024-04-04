@@ -59,6 +59,7 @@ const AcademicServicesPage = () => {
                 {filteredItems.map((item) => (
                     <Grid item xs={12} sm={6} md={4} key={item._id}>
                         <Card
+
                         >
                             <CardMedia
                                 component="img"
