@@ -74,7 +74,7 @@ function Signup({ setIsLoggedIn }) {
         </div>
 
         <button type="submit" onClick={submit}>
-          Resgister
+          Register
         </button>
 
         <div className="register">
