@@ -16,15 +16,26 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 function Header() {
   const [anchor, setAnchor] = useState(null);
+  const [anchorDropDown, setAnchorDropDown] = useState(null);
+  
 
   const openMenu = Boolean(anchor);
+  const openDropDown = Boolean(anchorDropDown);
 
   const handleClick = (e) => {
     setAnchor(e.currentTarget);
   };
 
+  const handleClickDropdown = (e) => {
+    setAnchorDropDown(e.currentTarget);
+  };
+
   const handleClose = () => {
     setAnchor(null);
+  };
+
+  const handleCloseDropdown = () => {
+    setAnchorDropDown(null);
   };
 
   const tok = localStorage.getItem("login");
@@ -44,9 +55,52 @@ function Header() {
                 aria-label="open drawer"
                 edge="start"
                 sx={{ mr: 2, display: { sm: "none" } }}
+                onClick={handleClickDropdown}
               >
                 <MenuIcon />
               </IconButton>
+              <Menu
+                    id="basic-menu"
+                    anchorEl={anchorDropDown}
+                    open={openDropDown}
+                    onClose={handleCloseDropdown}
+                  >
+                    <MenuItem
+                      component={Link}
+                      to="/ItemsForSale"
+                      onClick={handleCloseDropdown}
+                    >
+                      Items for Sale
+                    </MenuItem>
+                    <MenuItem
+                      component={Link}
+                      to="/itemsWanted"
+                      onClick={handleCloseDropdown}
+                    >
+                      Items Wanted
+                    </MenuItem>
+                    <MenuItem
+                      component={Link}
+                      to="/academicServices"
+                      onClick={handleCloseDropdown}
+                    >
+                      Academic Services
+                    </MenuItem>
+                    <MenuItem
+                      component={Link}
+                      to="/all-users"
+                      onClick={handleCloseDropdown}
+                    >
+                      Manage Users
+                    </MenuItem>
+                    <MenuItem
+                      component={Link}
+                      to="/aboutus"
+                      onClick={handleCloseDropdown}
+                    >
+                      About Us
+                    </MenuItem>
+                  </Menu>
               <Typography
                 variant="h6"
                 // component="div"
