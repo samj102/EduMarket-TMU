@@ -66,6 +66,7 @@ function App() {
             <Route path="/itemsForSale" element={<UploadItemPage />} />
             <Route path="/sell" element={<FormComponent />} />
             <Route path="/itemsWanted" element={<ItemsWanted />} />
+            <Route path="/aboutus" element={<AboutUsPage />} />
             <Route path="/privacyPolicy" element={<PrivacyPolicy />} />{" "}
             <Route
               path="/AcademicServices"
