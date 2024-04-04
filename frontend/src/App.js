@@ -9,7 +9,6 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useState, useEffect, createContext, useRef } from "react";
-// import Navbar from "./components/Navbar.js";
 import "bootstrap/dist/css/bootstrap.css";
 import Users from "./components/Users.js";
 import Logout from "./components/Logout.js";
@@ -22,36 +21,32 @@ import EditProfile from "./components/EditProfile.js";
 import Header from "./reusable/header.js";
 import Footer from "./reusable/footer.js";
 import FormComponent from "./components/SellAnItem.js";
-import PrivacyPolicy from "./components/privacyPolicy.js";
+import PrivacyPolicy from "./components/PrivacyPolicy.js";
 import Chats from "./components/Chats.js";
-
-import ReactDOM from "react-dom/client";
 import { jwtDecode } from "jwt-decode";
 
 const UserContext = createContext();
 
 function App() {
-  const [isLoggedin, setisLoggedin] = useState("false");
+  const [isLoggedin, setisLoggedin] = useState(false);
   const [profile, setProfile] = useState({});
-  const didLogIn = useRef(false);
   const didWsChange = useRef(false);
   const [ws, setWs] = useState(null);
+  const didMount = useRef(false);
+  useEffect(() => {
+    if (localStorage.length > 0) {
+      setisLoggedin(true);
+    }
+  }, []);
 
   useEffect(() => {
-    if (didLogIn) {
-      if (localStorage.length > 0) {
-        setisLoggedin("true");
-        if (isLoggedin) {
-          setWs(new WebSocket("ws://localhost:8080"));
-        }
-      }
-    } else {
-      didLogIn.current = true;
+    if (isLoggedin) {
+      setWs(new WebSocket("ws://localhost:8080"));
     }
   }, [isLoggedin]);
 
   useEffect(() => {
-    if (didWsChange) {
+    if (didWsChange.current) {
       if (localStorage.length > 0) {
         const decoded = jwtDecode(localStorage.getItem("login"));
         ws.addEventListener("open", () => {
@@ -65,19 +60,16 @@ function App() {
 
   return (
     <div className="App">
-      {/* <img
-        width="160"
-        height="90"
-        src={require("./components/advistaLogo.png")}
-        alt="Logo"
-      /> */}
-
       <Router>
-        {/* {isLoggedin === "true" && <Navbar />} */}
-        {isLoggedin === "true" && <Header />}
+        {isLoggedin && <Header />}
         <div style={{ minHeight: "80vh" }}>
           <Routes>
-            <Route path="/" element={<Navigate to="/login" />} />
+            <Route
+              path="/"
+              element={
+                isLoggedin ? <Navigate to="/home" /> : <Navigate to="/login" />
+              }
+            />
             <Route
               path="/login"
               element={
@@ -97,7 +89,7 @@ function App() {
             <Route path="/sell" element={<FormComponent />} />
             <Route path="/itemsWanted" element={<ItemsWanted />} />
             <Route path="/aboutus" element={<AboutUsPage />} />
-            <Route path="/privacyPolicy" element={<PrivacyPolicy />} />{" "}
+            <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />{" "}
             <Route
               path="/AcademicServices"
               element={<AcademicServicesPage />}
@@ -119,7 +111,7 @@ function App() {
             />
           </Routes>
         </div>
-        {/* {isLoggedin === "true" && <Footer />} */}
+        {isLoggedin && <Footer />}
       </Router>
     </div>
   );
