@@ -122,7 +122,7 @@ const AcademicServicesPage = () => {
         variant="contained"
         color="primary"
         onClick={() => navigate("/sell")} // Navigate to the sell page
-        style={{ marginBottom: "20px" }}
+        style={{ height: "55px", marginBottom: "20px" }}
       >
         Post an Ad
       </Button>
