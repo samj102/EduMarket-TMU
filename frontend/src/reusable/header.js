@@ -133,7 +133,7 @@ function Header() {
                     <Link to="/About_Us">About Us</Link>
                   </li>
                   <li>
-                    <Link to="/chat">Messages</Link>
+                    <Link to="/chat">Chats</Link>
                   </li>
                   <li
                     className="nav-links"

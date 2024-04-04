@@ -1,9 +1,9 @@
 import React from "react";
 import { jwtDecode } from "jwt-decode";
 import "../styles/Home.css";
-import AOS from "aos";
-import "aos/dist/aos.css";
-AOS.init({ duration: 2000 });
+// import AOS from "aos";
+// import "aos/dist/aos.css";
+// AOS.init({ duration: 2000 });
 function Home() {
   const tok = localStorage.getItem("login");
   const decoded = jwtDecode(tok);
@@ -16,9 +16,8 @@ function Home() {
         <div className="parent-container">
           <div className="d-flex parts">
             <div className="part1 d-flex flex-column justify-content-center align-items-center">
-              <h1 data-aos="slide-right">
-                Welcome to AdVista, {decoded.email}
-              </h1>
+              {/* <h1 data-aos="slide-right"> */}
+              <h1>Welcome to AdVista, {decoded.email}</h1>
               <div className="h-50">
                 <img
                   src="./advista-logo.png"
@@ -56,8 +55,6 @@ function Home() {
       </div>
     );
   }
-
-
 }
 
 export default Home;

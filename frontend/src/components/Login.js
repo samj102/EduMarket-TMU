@@ -27,10 +27,6 @@ function Login({ setIsLoggedIn, setProfile }) {
         document.cookie = `access_token=${token}`;
         const decoded = jwtDecode(JSON.stringify(token));
         const { data } = await api.get(`/user/${decoded.id}`);
-        const ws = new WebSocket("ws://localhost:8080");
-        ws.addEventListener("open", () => {
-          ws.send(JSON.stringify({ my_user_id: data._id }));
-        });
         setProfile({ email: data.email, name: data.name, id: data._id });
         history("/home", { state: { id: email, token: token } });
       } else if (res.status === 401) {

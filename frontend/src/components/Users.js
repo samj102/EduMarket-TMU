@@ -31,7 +31,7 @@ function Users() {
     if (decoded.role === "admin") {
       return (
         <>
-          <h1 style={{ textAlign: "center" }}>List of Users</h1>
+          <h1 style={{ textAlign: "center" }}>Users</h1>
           <div
             className="homepage"
             style={{
