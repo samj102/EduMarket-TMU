@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 function Signup({ setIsLoggedIn }) {
   const history = useNavigate();
-  setIsLoggedIn("false");
+  setIsLoggedIn(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -21,16 +21,13 @@ function Signup({ setIsLoggedIn }) {
         })
         .then((res) => {
           if (res.status === 200) {
-            setIsLoggedIn("true");
+            setIsLoggedIn(true);
             localStorage.setItem("login", res.data.token);
+            document.cookie = `access_token=${res.data.token}`;
             history("/home", { state: { id: email, token: res.data.token } });
           } else if (res.status === 409) {
             alert("User already exists");
           }
-
-          setIsLoggedIn("true");
-          localStorage.setItem("login", res.data.token);
-          history("/home", { state: { id: email, token: res.data.token } });
         })
         .catch((e) => {
           if (e.response.status === 409) alert("User already exists");

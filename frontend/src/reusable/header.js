@@ -17,7 +17,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 function Header() {
   const [anchor, setAnchor] = useState(null);
   const [anchorDropDown, setAnchorDropDown] = useState(null);
-  
 
   const openMenu = Boolean(anchor);
   const openDropDown = Boolean(anchorDropDown);
@@ -60,50 +59,49 @@ function Header() {
                 <MenuIcon />
               </IconButton>
               <Menu
-                    id="basic-menu"
-                    anchorEl={anchorDropDown}
-                    open={openDropDown}
-                    onClose={handleCloseDropdown}
-                  >
-                    <MenuItem
-                      component={Link}
-                      to="/ItemsForSale"
-                      onClick={handleCloseDropdown}
-                    >
-                      Items for Sale
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      to="/itemsWanted"
-                      onClick={handleCloseDropdown}
-                    >
-                      Items Wanted
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      to="/academicServices"
-                      onClick={handleCloseDropdown}
-                    >
-                      Academic Services
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      to="/all-users"
-                      onClick={handleCloseDropdown}
-                    >
-                      Manage Users
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      to="/aboutus"
-                      onClick={handleCloseDropdown}
-                    >
-                      About Us
-                    </MenuItem>
-                  </Menu>
+                id="basic-menu"
+                anchorEl={anchorDropDown}
+                open={openDropDown}
+                onClose={handleCloseDropdown}
+              >
+                <MenuItem
+                  component={Link}
+                  to="/ItemsForSale"
+                  onClick={handleCloseDropdown}
+                >
+                  Items for Sale
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/itemsWanted"
+                  onClick={handleCloseDropdown}
+                >
+                  Items Wanted
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/academicServices"
+                  onClick={handleCloseDropdown}
+                >
+                  Academic Services
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/all-users"
+                  onClick={handleCloseDropdown}
+                >
+                  Manage Users
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/aboutus"
+                  onClick={handleCloseDropdown}
+                >
+                  About Us
+                </MenuItem>
+              </Menu>
               <Typography
                 variant="h6"
-                // component="div"
                 sx={{
                   flexGrow: 1,
                   fontFamily: "El Messiri",
@@ -205,6 +203,9 @@ function Header() {
                   </li>
                   <li>
                     <Link to="/About_Us">About Us</Link>
+                  </li>
+                  <li>
+                    <Link to="/chat">Chats</Link>
                   </li>
                   <li
                     className="nav-links"

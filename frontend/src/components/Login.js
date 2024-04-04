@@ -6,9 +6,7 @@ import { jwtDecode } from "jwt-decode";
 
 import "../styles/Login.css";
 
-// localStorage.clear();
 function Login({ setIsLoggedIn, setProfile }) {
-  setIsLoggedIn("false");
   const history = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +18,6 @@ function Login({ setIsLoggedIn, setProfile }) {
         password: password,
       });
       const token = await res.data.token;
-      console.log(token);
       if (token) {
         setIsLoggedIn("true");
         localStorage.setItem("login", token);

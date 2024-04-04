@@ -13,7 +13,6 @@ const Messages = ({ chat, userName, UserContext }) => {
 
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  console.log(chat);
 
   function handleNewMessage(newMessage) {
     setNewMessage(newMessage);
@@ -35,7 +34,6 @@ const Messages = ({ chat, userName, UserContext }) => {
 
   useEffect(() => {
     ws.addEventListener("message", (message) => {
-      console.log(JSON.parse(message.data).chat);
       if (JSON.parse(message.data).chat === chat) {
         getMessages();
       }
@@ -46,7 +44,6 @@ const Messages = ({ chat, userName, UserContext }) => {
     if (chat) {
       const { data } = await api.get(`/chat/${chat}`);
       if (data) {
-        console.log(data);
         setMessages(data.messages);
       }
     }
@@ -55,12 +52,6 @@ const Messages = ({ chat, userName, UserContext }) => {
     getMessages();
   }, [chat]);
 
-  // useEffect(() => {
-  //   ws.addEventListener("message", function message(incMessage) {
-  //     console.log(incMessage);
-  //   });
-  // }, []);
-  console.log(messages);
   const scroll = useRef();
   return (
     <>

@@ -16,7 +16,6 @@ function webSocketServer(server) {
       } else {
         connections[message.my_user_id] = ws;
       }
-      // console.log(connections);
     });
     ws.on("close", () => {
       const user_id = Object.keys(connections).find(

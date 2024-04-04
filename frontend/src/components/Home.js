@@ -1,15 +1,12 @@
 import React from "react";
 import { jwtDecode } from "jwt-decode";
 import "../styles/Home.css";
-// import AOS from "aos";
-// import "aos/dist/aos.css";
-// AOS.init({ duration: 2000 });
+import AOS from "aos";
+import "aos/dist/aos.css";
+AOS.init({ duration: 2000 });
 function Home() {
   const tok = localStorage.getItem("login");
   const decoded = jwtDecode(tok);
-  console.log(decoded);
-  console.log(decoded.role);
-
   if (decoded.role === "admin") {
     return (
       <>

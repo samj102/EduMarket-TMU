@@ -24,10 +24,7 @@ function Users() {
   }, []);
   try {
     const tok = localStorage.getItem("login");
-    console.log(tok);
     const decoded = jwtDecode(tok);
-    console.log(data);
-    console.log(decoded);
     if (decoded.role === "admin") {
       return (
         <>
