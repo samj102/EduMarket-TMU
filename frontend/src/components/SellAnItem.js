@@ -30,8 +30,9 @@ const FormComponent = ({ postPersonId }) => {
             formDataWithImages.append('price', formData.price);
             formDataWithImages.append('category', formData.category);
             formDataWithImages.append('post_person_id', formData.post_person_id);
-            formData.images.forEach((image) => {
-                formDataWithImages.append('images', image);
+            // formDataWithImages.append('image', formData.images[0])
+            formData.images.forEach((image, index) => {
+                formDataWithImages.append(`image`, formData.images[index]);
             });
             const response = await api.post("/ad", formDataWithImages, {
                 headers: {
