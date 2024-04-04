@@ -43,10 +43,10 @@ function Users() {
           >
             <table
               style={{
-                width: 700,
-                height: 500,
+                maxWidth: "100%",
                 border: "1px solid",
                 backgroundColor: "white",
+                overflowX: "auto",
               }}
             >
               <tr style={{ textAlign: "center", border: "1px solid" }}>
