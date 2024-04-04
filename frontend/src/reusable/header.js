@@ -26,7 +26,7 @@ function Header() {
     setAnchor(e.currentTarget);
   };
 
-  const handleClickDropdown = (e) => { // New click handler for dropdown
+  const handleClickDropdown = (e) => {
     setAnchorDropDown(e.currentTarget);
   };
 
@@ -34,7 +34,7 @@ function Header() {
     setAnchor(null);
   };
 
-  const handleCloseDropdown = () => { // New close handler for dropdown
+  const handleCloseDropdown = () => {
     setAnchorDropDown(null);
   };
 
