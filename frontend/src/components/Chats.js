@@ -14,8 +14,7 @@ const Chats = ({ profile, UserContext }) => {
 
   const ws = useContext(UserContext);
   useEffect(() => {
-    if (didWsChange) {
-      console.log(ws);
+    if (didWsChange.current) {
       ws.addEventListener("message", (message) => {
         console.log(message);
       });
@@ -26,15 +25,11 @@ const Chats = ({ profile, UserContext }) => {
 
   async function getChats() {
     const { data } = await api.get(`/user/${decoded.id}`);
-    console.log(data);
     if (data) {
       let chatArr = [];
-      // setChats(res.data.chats);
       const chatIDs = data.chats;
-      console.log(chatIDs);
       for (let i = 0; i < chatIDs.length; i++) {
         const res1 = await api.get(`/chat/${chatIDs[i]}`);
-        console.log(res1.data);
         if (res1.data.user_a._id === decoded.id) {
           chatArr.push({ user: res1.data.user_b, chatID: chatIDs[i] });
         } else {
@@ -42,14 +37,12 @@ const Chats = ({ profile, UserContext }) => {
         }
       }
       setUserData(chatArr);
-    } else console.log("Wassup");
+    }
   }
 
   useEffect(() => {
     getChats();
   }, []);
-
-  console.log(userData);
 
   return (
     <div className="Chat">
