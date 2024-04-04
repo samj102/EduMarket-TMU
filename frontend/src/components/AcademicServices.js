@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Grid, Card, CardContent, Typography, CardMedia, TextField, Button } from "@mui/material";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from "../utils/api";
 
 const AcademicServicesPage = () => {
@@ -58,11 +58,12 @@ const AcademicServicesPage = () => {
             <Grid container spacing={3}>
                 {filteredItems.map((item) => (
                     <Grid item xs={12} sm={6} md={4} key={item._id}>
-                        <Card>
+                        <Card
+                        >
                             <CardMedia
                                 component="img"
                                 height="140"
-                                image={item.imageUrl || "/placeholder-image-url.jpg"}
+                                image={"http://localhost:8080/ad/" + item.image[0]}
                                 alt={item.name}
                             />
                             <CardContent>

@@ -60,7 +60,7 @@ const ItemsForSale = () => {
                             <CardMedia
                                 component="img"
                                 height="140"
-                                image={item.imageUrl || "/placeholder-image-url.jpg"}
+                                image={"http://localhost:8080/ad/" + item.image[0]}
                                 alt={item.name}
                             />
                             <CardContent>
