@@ -8,12 +8,17 @@ import {
   CardMedia,
   TextField,
   Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../utils/api";
 import { jwtDecode } from "jwt-decode";
 
 const AcademicServicesPage = () => {
+  const [filterPrice, setFilterPrice] = useState("");
   const [items, setItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const decoded = jwtDecode(localStorage.getItem("login"));
@@ -33,7 +38,7 @@ const AcademicServicesPage = () => {
           message: `I am interested in your item, ${postTitle}`,
         };
         await api.put(`/chat/${res.data[0]._id}`, data);
-        navigate(`/chat`);
+        alert("Message sent! Go to chat to see the conversation.");
       } else {
         const data = {
           sender: decoded.id,
@@ -41,23 +46,35 @@ const AcademicServicesPage = () => {
           message: `I am interested in buying your item, ${postTitle}`,
         };
         await api.post("/chat", data);
-        navigate("/chat");
+        alert("Message sent! Go to chat to see the conversation.");
       }
     } catch (e) {
       console.log(e);
     }
   }
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const response = await api.get("/ad");
-        setItems(response.data);
-      } catch (error) {
-        console.error("Failed to fetch items:", error);
-      }
-    };
+  const handleFilterPrice = async (event) => {
+    const filter = event.target.value;
+    const response = await api.get("/ad");
+    if (filter === "0 - 50") {
+      setItems(response.data.filter((item) => item.price <= 50));
+    } else if (filter === "More than 50") {
+      setItems(response.data.filter((item) => item.price > 50));
+    } else {
+      setItems(response.data);
+    }
+    setFilterPrice(filter);
+  };
 
+  const fetchItems = async () => {
+    try {
+      const response = await api.get("/ad");
+      setItems(response.data);
+    } catch (error) {
+      console.error("Failed to fetch items:", error);
+    }
+  };
+  useEffect(() => {
     fetchItems();
   }, []);
 
@@ -80,6 +97,27 @@ const AcademicServicesPage = () => {
         onChange={handleSearchChange}
         style={{ marginBottom: "20px" }}
       />
+      <FormControl
+        variant="outlined"
+        style={{
+          width: "150px",
+          marginRight: "10px",
+          marginBottom: "20px",
+        }}
+      >
+        <InputLabel id="price-filter-label">Filter by Price</InputLabel>
+        <Select
+          labelId="price-filter-label"
+          id="price-filter"
+          value={filterPrice} // Add state for selected price filter
+          onChange={handleFilterPrice}
+          label="Filter by Price"
+        >
+          <MenuItem value={"All"}>All</MenuItem>
+          <MenuItem value={"0 - 50"}>0 - 50</MenuItem>
+          <MenuItem value={"More than 50"}>More than 50</MenuItem>
+        </Select>
+      </FormControl>
       <Button // Same routing to Sell an item page as creating a new one would be redundant
         variant="contained"
         color="primary"
@@ -91,7 +129,7 @@ const AcademicServicesPage = () => {
       <Grid container spacing={3}>
         {filteredItems.map((item) => (
           <Grid item xs={12} sm={6} md={4} key={item._id}>
-            <Card>
+            <Card sx={{ p: 2 }}>
               <CardMedia
                 component="img"
                 height="140"
@@ -104,6 +142,9 @@ const AcademicServicesPage = () => {
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   {item.description}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Price: ${item.price}
                 </Typography>
               </CardContent>
               {decoded.id != item.post_person_id ? (
