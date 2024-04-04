@@ -24,23 +24,25 @@ function Users() {
   }, []);
   try {
     const tok = localStorage.getItem("login");
-    console.log(tok);
     const decoded = jwtDecode(tok);
-    console.log(data);
-    console.log(decoded);
     if (decoded.role === "admin") {
       return (
         <>
-          <h1>List of Users currently signed up:</h1>
+          <h1 style={{ textAlign: "center", margin: "20px" }}>Users</h1>
           <div
             className="homepage"
-            style={{ display: "flex", alignItems: "center" }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "10px",
+            }}
           >
             <table
               style={{
-                width: 500,
-                border: "1px solid",
-                backgroundColor: "white",
+                maxWidth: "100%",
+                  border: "1px solid",
+                  backgroundColor: "white",
               }}
             >
               <tr style={{ textAlign: "center", border: "1px solid" }}>

@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import validateForm from "../utils/validateForm.js";
 
 function Signup({ setIsLoggedIn }) {
   const history = useNavigate();
-  setIsLoggedIn("false");
+  setIsLoggedIn(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
   async function submit(e) {
     e.preventDefault();
-
+    if (!validateForm(email, password)) {
+      return;
+    }
     try {
       await axios
         .post("http://localhost:8080/auth/register", {
@@ -21,16 +24,13 @@ function Signup({ setIsLoggedIn }) {
         })
         .then((res) => {
           if (res.status === 200) {
-            setIsLoggedIn("true");
+            setIsLoggedIn(true);
             localStorage.setItem("login", res.data.token);
+            document.cookie = `access_token=${res.data.token}`;
             history("/home", { state: { id: email, token: res.data.token } });
           } else if (res.status === 409) {
             alert("User already exists");
           }
-
-          setIsLoggedIn("true");
-          localStorage.setItem("login", res.data.token);
-          history("/home", { state: { id: email, token: res.data.token } });
         })
         .catch((e) => {
           if (e.response.status === 409) alert("User already exists");
@@ -74,7 +74,7 @@ function Signup({ setIsLoggedIn }) {
         </div>
 
         <button type="submit" onClick={submit}>
-          Resgister
+          Register
         </button>
 
         <div className="register">

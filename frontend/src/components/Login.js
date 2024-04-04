@@ -4,14 +4,15 @@ import { useNavigate, Link } from "react-router-dom";
 import api from "../utils/api";
 import { jwtDecode } from "jwt-decode";
 
-import "./Login.css";
+import "../styles/Login.css";
 
-// localStorage.clear();
 function Login({ setIsLoggedIn, setProfile }) {
-  setIsLoggedIn("false");
   const history = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  if (localStorage.getItem("login") !== null) {
+    history("/home");
+  }
   async function submit(e) {
     e.preventDefault();
     try {
@@ -20,7 +21,6 @@ function Login({ setIsLoggedIn, setProfile }) {
         password: password,
       });
       const token = await res.data.token;
-      console.log(token);
       if (token) {
         setIsLoggedIn("true");
         localStorage.setItem("login", token);
@@ -30,57 +30,74 @@ function Login({ setIsLoggedIn, setProfile }) {
         setProfile({ email: data.email, name: data.name, id: data._id });
         history("/home", { state: { id: email, token: token } });
       } else if (res.status === 401) {
-        alert("User has not sign up");
+        alert("Incorrect Email or Password");
+      } else if (res.status === 500) {
+        alert("Login failed");
       }
     } catch (e) {
+      if (e.response.status == 401) alert("Incorrect Email or Password");
+      else if (e.response.status == 500) alert("Login failed");
       console.log(e);
     }
   }
 
   return (
-    <div className="login_container">
-      <form action="" className="Form">
-        <h1>Login</h1>
-        <div className="input">
-          <input
-            type="text"
-            placeholder="Email"
-            onChange={(e) => {
-              setEmail(e.target.value);
+    <>
+      <div className="login_container">
+        <form action="" className="Form">
+          <img
+            src="./advista-logo.png"
+            style={{
+              width: "65%",
+              display: "block",
+              marginLeft: "auto",
+              marginRight: "auto",
             }}
-            required
-          />
-        </div>
-        <div className="input">
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            required
-          />
-        </div>
+            alt="logo"
+            className="profile"
+          ></img>
+          {/* <h1>Login</h1> */}
+          <div className="input">
+            <input
+              type="text"
+              placeholder="Email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+              required
+            />
+          </div>
+          <div className="input">
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              required
+            />
+          </div>
 
-        <div className="forgot_password">
-          <label>
-            <input type="checkbox" />
-            Remember me
-          </label>
-          <a href="#">Forgot Password?</a>
-        </div>
+          {/* <div className="forgot_password">
+            <label>
+              <input type="checkbox" />
+              Remember me
+            </label>
+            <a href="#">Forgot Password?</a>
+          </div> */}
 
-        <button type="submit" onClick={submit}>
-          Login
-        </button>
+          <button type="submit" onClick={submit}>
+            Login
+          </button>
 
-        <div className="register">
-          <p>
-            Don't have an account? <Link to="/signup">Register</Link>
-          </p>
-        </div>
-      </form>
-    </div>
+          <div className="register">
+            <p>
+              Don't have an account? <Link to="/signup">Register</Link>
+            </p>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 

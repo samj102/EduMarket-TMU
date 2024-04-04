@@ -18,9 +18,12 @@ const userSchema = new mongoose.Schema({
     enum: ["student", "admin"],
     default: "student",
   },
-  address: {
-    type: String,
-  },
+  chats: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "chat",
+    },
+  ],
 });
 
 const userModel = mongoose.model("user", userSchema);

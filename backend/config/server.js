@@ -7,7 +7,7 @@
 const app = require("../src/app");
 const debug = require("debug")("project:server");
 const http = require("http");
-
+const webSocketServer = require("./webSocket");
 /**
  * Get port from environment and store in Express.
  */
@@ -20,7 +20,7 @@ app.set("port", port);
  */
 
 const server = http.createServer(app);
-
+webSocketServer(server);
 /**
  * Listen on provided port, on all network interfaces.
  */

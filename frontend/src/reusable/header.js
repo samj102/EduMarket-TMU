@@ -18,7 +18,6 @@ function Header() {
   const [anchor, setAnchor] = useState(null);
   const [anchorDropDown, setAnchorDropDown] = useState(null);
   const [anchorDropDown2, setAnchorDropDown2] = useState(null);
-  
 
   const openMenu = Boolean(anchor);
   const openDropDown = Boolean(anchorDropDown);
@@ -70,64 +69,63 @@ function Header() {
                 <MenuIcon />
               </IconButton>
               <Menu
-                    id="basic-menu"
-                    anchorEl={anchorDropDown}
-                    open={openDropDown}
-                    onClose={handleCloseDropdown}
-                  >
-                    <MenuItem
-                      component={Link}
-                      to="/ItemsForSale"
-                      onClick={handleCloseDropdown}
-                    >
-                      Items for Sale
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      to="/itemsWanted"
-                      onClick={handleCloseDropdown}
-                    >
-                      Items Wanted
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      to="/academicServices"
-                      onClick={handleCloseDropdown}
-                    >
-                      Academic Services
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      to="/all-users"
-                      onClick={handleCloseDropdown}
-                    >
-                      Manage Users
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      to="/aboutus"
-                      onClick={handleCloseDropdown}
-                    >
-                      About Us
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      to="/edit-profile"
-                      onClick={handleCloseDropdown}
-                    >
-                      Your Profile
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      to="/logout"
-                      onClick={handleCloseDropdown}
-                    >
-                      Logout
-                    </MenuItem>
-                  </Menu>
+                id="basic-menu"
+                anchorEl={anchorDropDown}
+                open={openDropDown}
+                onClose={handleCloseDropdown}
+              >
+                <MenuItem
+                  component={Link}
+                  to="/ItemsForSale"
+                  onClick={handleCloseDropdown}
+                >
+                  Items for Sale
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/itemsWanted"
+                  onClick={handleCloseDropdown}
+                >
+                  Items Wanted
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/academicServices"
+                  onClick={handleCloseDropdown}
+                >
+                  Academic Services
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/all-users"
+                  onClick={handleCloseDropdown}
+                >
+                  Manage Users
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/aboutus"
+                  onClick={handleCloseDropdown}
+                >
+                  About Us
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/edit-profile"
+                  onClick={handleCloseDropdown}
+                >
+                  Your Profile
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/logout"
+                  onClick={handleCloseDropdown}
+                >
+                  Logout
+                </MenuItem>
+              </Menu>
               <Typography
                 variant="h6"
-                // component="div"
                 sx={{
                   flexGrow: 1,
                   fontFamily: "El Messiri",
@@ -155,6 +153,9 @@ function Header() {
                   </li>
                   <li>
                     <Link to="/About_Us">About Us</Link>
+                  </li>
+                  <li>
+                    <Link to="/chat">Chats</Link>
                   </li>
                   <li
                     className="nav-links"
@@ -209,7 +210,7 @@ function Header() {
             sx={{ bgcolor: "#5fa180", position: "sticky" }}
           >
             <Toolbar>
-            <IconButton
+              <IconButton
                 color="white"
                 aria-label="open drawer"
                 edge="start"
@@ -219,54 +220,54 @@ function Header() {
                 <MenuIcon />
               </IconButton>
               <Menu
-                    id="basic-menu"
-                    anchorEl={anchorDropDown2}
-                    open={openDropDown2}
-                    onClose={handleCloseDropdown2}
-                  >
-                    <MenuItem
-                      component={Link}
-                      to="/ItemsForSale"
-                      onClick={handleCloseDropdown2}
-                    >
-                      Items for Sale
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      to="/itemsWanted"
-                      onClick={handleCloseDropdown2}
-                    >
-                      Items Wanted
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      to="/academicServices"
-                      onClick={handleCloseDropdown2}
-                    >
-                      Academic Services
-                    </MenuItem> 
-                    <MenuItem
-                      component={Link}
-                      to="/aboutus"
-                      onClick={handleCloseDropdown2}
-                    >
-                      About Us
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      to="/edit-profile"
-                      onClick={handleCloseDropdown2}
-                    >
-                      Your Profile
-                    </MenuItem>
-                    <MenuItem
-                      component={Link}
-                      to="/logout"
-                      onClick={handleCloseDropdown2}
-                    >
-                      Logout
-                    </MenuItem>
-                  </Menu>
+                id="basic-menu"
+                anchorEl={anchorDropDown2}
+                open={openDropDown2}
+                onClose={handleCloseDropdown2}
+              >
+                <MenuItem
+                  component={Link}
+                  to="/ItemsForSale"
+                  onClick={handleCloseDropdown2}
+                >
+                  Items for Sale
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/itemsWanted"
+                  onClick={handleCloseDropdown2}
+                >
+                  Items Wanted
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/academicServices"
+                  onClick={handleCloseDropdown2}
+                >
+                  Academic Services
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/aboutus"
+                  onClick={handleCloseDropdown2}
+                >
+                  About Us
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/edit-profile"
+                  onClick={handleCloseDropdown2}
+                >
+                  Your Profile
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/logout"
+                  onClick={handleCloseDropdown2}
+                >
+                  Logout
+                </MenuItem>
+              </Menu>
               <Typography variant="h3" component="div" sx={{ flexGrow: 1 }}>
                 <img src="./favicon.ico"></img>Advista
               </Typography>
@@ -283,6 +284,9 @@ function Header() {
                   </li>
                   <li>
                     <Link to="/About_Us">About Us</Link>
+                  </li>
+                  <li>
+                    <Link to="/chat">Chats</Link>
                   </li>
                   <li
                     className="nav-links"
