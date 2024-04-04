@@ -102,13 +102,7 @@ function App() {
                 <EditProfile profile={profile} setProfile={setProfile} />
               }
             />
-            <Route
-              path="/MyAds"
-              element={
-                <MyAds />
-                // <EditProfile profile={profile} setProfile={setProfile} />
-              }
-            />
+            <Route path="/MyAds" element={<MyAds />} />
             <Route
               path="/chat"
               element={

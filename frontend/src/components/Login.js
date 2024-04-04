@@ -27,9 +27,13 @@ function Login({ setIsLoggedIn, setProfile }) {
         setProfile({ email: data.email, name: data.name, id: data._id });
         history("/home", { state: { id: email, token: token } });
       } else if (res.status === 401) {
-        alert("User has not sign up");
+        alert("Incorrect Email or Password");
+      } else if (res.status === 500) {
+        alert("Login failed");
       }
     } catch (e) {
+      if (e.response.status == 401) alert("Incorrect Email or Password");
+      else if (e.response.status == 500) alert("Login failed");
       console.log(e);
     }
   }
@@ -71,13 +75,13 @@ function Login({ setIsLoggedIn, setProfile }) {
             />
           </div>
 
-          <div className="forgot_password">
+          {/* <div className="forgot_password">
             <label>
               <input type="checkbox" />
               Remember me
             </label>
             <a href="#">Forgot Password?</a>
-          </div>
+          </div> */}
 
           <button type="submit" onClick={submit}>
             Login
