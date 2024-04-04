@@ -8,7 +8,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext, useRef } from "react";
 // import Navbar from "./components/Navbar.js";
 import "bootstrap/dist/css/bootstrap.css";
 import Users from "./components/Users.js";
@@ -25,14 +25,44 @@ import FormComponent from "./components/SellAnItem.js";
 import PrivacyPolicy from "./components/privacyPolicy.js";
 import Chats from "./components/Chats.js";
 
+import ReactDOM from "react-dom/client";
+import { jwtDecode } from "jwt-decode";
+
+const UserContext = createContext();
+
 function App() {
   const [isLoggedin, setisLoggedin] = useState("false");
   const [profile, setProfile] = useState({});
+  const didLogIn = useRef(false);
+  const didWsChange = useRef(false);
+  const [ws, setWs] = useState(null);
+
   useEffect(() => {
-    if (localStorage.length > 0) {
-      setisLoggedin("true");
+    if (didLogIn) {
+      if (localStorage.length > 0) {
+        setisLoggedin("true");
+        if (isLoggedin) {
+          setWs(new WebSocket("ws://localhost:8080"));
+        }
+      }
+    } else {
+      didLogIn.current = true;
     }
   }, [isLoggedin]);
+
+  useEffect(() => {
+    if (didWsChange) {
+      if (localStorage.length > 0) {
+        const decoded = jwtDecode(localStorage.getItem("login"));
+        ws.addEventListener("open", () => {
+          ws.send(JSON.stringify({ my_user_id: decoded.id }));
+        });
+      }
+    } else {
+      didWsChange.current = true;
+    }
+  }, [ws]);
+
   return (
     <div className="App">
       {/* <img
@@ -78,10 +108,17 @@ function App() {
                 <EditProfile profile={profile} setProfile={setProfile} />
               }
             />
-            <Route path="/chat" element={<Chats profile={profile} />} />
+            <Route
+              path="/chat"
+              element={
+                <UserContext.Provider value={ws}>
+                  <Chats profile={profile} UserContext={UserContext} />
+                </UserContext.Provider>
+              }
+            />
           </Routes>
         </div>
-        {isLoggedin === "true" && <Footer />}
+        {/* {isLoggedin === "true" && <Footer />} */}
       </Router>
     </div>
   );

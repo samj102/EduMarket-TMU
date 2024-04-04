@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useRef } from "react";
 import "../styles/Chats.css";
 import api from "../utils/api";
@@ -6,8 +6,10 @@ import { jwtDecode } from "jwt-decode";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
 
-const Messages = ({ chat, userName }) => {
+const Messages = ({ chat, userName, UserContext }) => {
   const decoded = jwtDecode(localStorage.getItem("login"));
+
+  const ws = useContext(UserContext);
 
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -19,10 +21,26 @@ const Messages = ({ chat, userName }) => {
 
   async function handleMessageClick() {
     const data = { sender: decoded.id, message: newMessage };
-    await api.put(`/chat/${chat}`, data);
+    const res = await api.put(`/chat/${chat}`, data);
+    ws.send(
+      JSON.stringify({
+        chat: chat,
+        receiver:
+          res.data.user_a === decoded.id ? res.data.user_b : res.data.user_a,
+      })
+    );
     getMessages();
     setNewMessage("");
   }
+
+  useEffect(() => {
+    ws.addEventListener("message", (message) => {
+      console.log(JSON.parse(message.data).chat);
+      if (JSON.parse(message.data).chat === chat) {
+        getMessages();
+      }
+    });
+  }, []);
 
   async function getMessages() {
     if (chat) {
@@ -36,6 +54,12 @@ const Messages = ({ chat, userName }) => {
   useEffect(() => {
     getMessages();
   }, [chat]);
+
+  // useEffect(() => {
+  //   ws.addEventListener("message", function message(incMessage) {
+  //     console.log(incMessage);
+  //   });
+  // }, []);
   console.log(messages);
   const scroll = useRef();
   return (

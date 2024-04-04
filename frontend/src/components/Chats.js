@@ -1,15 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import "../styles/Chats.css";
 import api from "../utils/api.js";
 import Conversation from "./Conversation.js";
 import Messages from "./Messages.js";
 import { jwtDecode } from "jwt-decode";
 
-const Chats = ({ profile }) => {
+const Chats = ({ profile, UserContext }) => {
   const decoded = jwtDecode(localStorage.getItem("login"));
   const [chat, setChat] = useState("");
   const [userData, setUserData] = useState([]);
   const [userName, setUserName] = useState("");
+  const didWsChange = useRef(false);
+
+  const ws = useContext(UserContext);
+  useEffect(() => {
+    if (didWsChange) {
+      console.log(ws);
+      ws.addEventListener("message", (message) => {
+        console.log(message);
+      });
+    } else {
+      didWsChange.current = true;
+    }
+  }, [ws]);
+
   async function getChats() {
     const { data } = await api.get(`/user/${decoded.id}`);
     console.log(data);
@@ -64,7 +78,9 @@ const Chats = ({ profile }) => {
       </div>
 
       <div className="Right-side-chat">
-        {chat != "" && <Messages chat={chat} userName={userName} />}
+        {chat != "" && (
+          <Messages chat={chat} userName={userName} UserContext={UserContext} />
+        )}
       </div>
     </div>
   );
