@@ -28,25 +28,21 @@ function Users() {
     if (decoded.role === "admin") {
       return (
         <>
-          <h1 style={{ textAlign: "center" }}>Users</h1>
+          <h1 style={{ textAlign: "center", margin: "20px" }}>Users</h1>
           <div
             className="homepage"
             style={{
               display: "flex",
               alignItems: "center",
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
+              justifyContent: "center",
               padding: "10px",
             }}
           >
             <table
               style={{
                 maxWidth: "100%",
-                border: "1px solid",
-                backgroundColor: "white",
-                overflowX: "auto",
+                  border: "1px solid",
+                  backgroundColor: "white",
               }}
             >
               <tr style={{ textAlign: "center", border: "1px solid" }}>
