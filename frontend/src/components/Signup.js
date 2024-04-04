@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import validateForm from "../utils/validateForm.js";
 
 function Signup({ setIsLoggedIn }) {
   const history = useNavigate();
@@ -11,7 +12,9 @@ function Signup({ setIsLoggedIn }) {
 
   async function submit(e) {
     e.preventDefault();
-
+    if (!validateForm(email, password)) {
+      return;
+    }
     try {
       await axios
         .post("http://localhost:8080/auth/register", {
