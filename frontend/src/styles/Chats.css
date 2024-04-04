@@ -195,6 +195,32 @@
   border-radius:8px;
   font-size: 16px;
 }
+
+.button-interested {
+  background-color: rgb(46, 155, 228); 
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius:8px;
+  font-size: 16px;
+  margin-right: 0px;
+}
+
+.button-ownPost {
+  background-color: rgb(95, 103, 107); 
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius:8px;
+  font-size: 16px;
+  margin-right: 0px;
+}
   
   
   @media screen and (max-width: 768px) {
