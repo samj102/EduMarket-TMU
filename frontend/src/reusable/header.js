@@ -17,9 +17,11 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 function Header() {
   const [anchor, setAnchor] = useState(null);
   const [anchorDropDown, setAnchorDropDown] = useState(null);
+  const [anchorDropDown2, setAnchorDropDown2] = useState(null);
 
   const openMenu = Boolean(anchor);
   const openDropDown = Boolean(anchorDropDown);
+  const openDropDown2 = Boolean(anchorDropDown2);
 
   const handleClick = (e) => {
     setAnchor(e.currentTarget);
@@ -29,12 +31,20 @@ function Header() {
     setAnchorDropDown(e.currentTarget);
   };
 
+  const handleClickDropdown2 = (e) => {
+    setAnchorDropDown2(e.currentTarget);
+  };
+
   const handleClose = () => {
     setAnchor(null);
   };
 
   const handleCloseDropdown = () => {
     setAnchorDropDown(null);
+  };
+
+  const handleCloseDropdown2 = () => {
+    setAnchorDropDown2(null);
   };
 
   const tok = localStorage.getItem("login");
@@ -98,6 +108,20 @@ function Header() {
                   onClick={handleCloseDropdown}
                 >
                   About Us
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/edit-profile"
+                  onClick={handleCloseDropdown}
+                >
+                  Your Profile
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/logout"
+                  onClick={handleCloseDropdown}
+                >
+                  Logout
                 </MenuItem>
               </Menu>
               <Typography
@@ -184,9 +208,59 @@ function Header() {
                 aria-label="open drawer"
                 edge="start"
                 sx={{ mr: 2, display: { sm: "none" } }}
+                onClick={handleClickDropdown2}
               >
                 <MenuIcon />
               </IconButton>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorDropDown2}
+                open={openDropDown2}
+                onClose={handleCloseDropdown2}
+              >
+                <MenuItem
+                  component={Link}
+                  to="/ItemsForSale"
+                  onClick={handleCloseDropdown2}
+                >
+                  Items for Sale
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/itemsWanted"
+                  onClick={handleCloseDropdown2}
+                >
+                  Items Wanted
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/academicServices"
+                  onClick={handleCloseDropdown2}
+                >
+                  Academic Services
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/aboutus"
+                  onClick={handleCloseDropdown2}
+                >
+                  About Us
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/edit-profile"
+                  onClick={handleCloseDropdown2}
+                >
+                  Your Profile
+                </MenuItem>
+                <MenuItem
+                  component={Link}
+                  to="/logout"
+                  onClick={handleCloseDropdown2}
+                >
+                  Logout
+                </MenuItem>
+              </Menu>
               <Typography variant="h3" component="div" sx={{ flexGrow: 1 }}>
                 <img src="./favicon.ico"></img>Advista
               </Typography>
