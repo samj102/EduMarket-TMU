@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: process.env.baseURL || "http://localhost:8080",
+  baseURL: process.env.REACT_APP_REQUEST_URL,
   headers: {
     Cookie: `access_token=${document.cookie}`,
   },

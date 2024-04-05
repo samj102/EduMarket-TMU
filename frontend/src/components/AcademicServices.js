@@ -88,9 +88,16 @@ const AcademicServicesPage = () => {
   return (
     <Container maxWidth="lg" style={{ marginTop: "20px", textAlign: "center" }}>
       <Typography variant="h2" gutterBottom>
-        <span style={{ color: "#4CAF50" }}>A</span>cademic <span style={{ color: "#4CAF50" }}>S</span>ervices
+        <span style={{ color: "#4CAF50" }}>A</span>cademic{" "}
+        <span style={{ color: "#4CAF50" }}>S</span>ervices
       </Typography>
-      <div style={{ marginBottom: "20px", display: "flex", justifyContent: "center" }}>
+      <div
+        style={{
+          marginBottom: "20px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <TextField
           label="Search Items"
           variant="outlined"
@@ -137,7 +144,7 @@ const AcademicServicesPage = () => {
                 component="img"
                 height="140"
                 image={
-                  (process.env.base_url || "http://localhost:8080") +
+                  process.env.REACT_APP_REQUEST_URL +
                   "/ad/" +
                   (item.image[0] || "uploads/default.png")
                 }

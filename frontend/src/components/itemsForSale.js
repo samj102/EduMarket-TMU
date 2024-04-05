@@ -89,7 +89,8 @@ const ItemsForSale = () => {
     <Container maxWidth="lg" style={{ marginTop: "20px", textAlign: "center" }}>
       <Typography variant="h2" gutterBottom>
         <span style={{ color: "#4CAF50" }}>I</span>
-        tems <span style={{ color: "#4CAF50" }}>F</span>or <span style={{ color: "#4CAF50" }}>S</span>ale
+        tems <span style={{ color: "#4CAF50" }}>F</span>or{" "}
+        <span style={{ color: "#4CAF50" }}>S</span>ale
       </Typography>
       <div style={{ marginBottom: "20px" }}>
         <div style={{ marginBottom: "20px" }}>
@@ -131,7 +132,7 @@ const ItemsForSale = () => {
                 component="img"
                 height="200"
                 image={
-                  (process.env.base_url || "http://localhost:8080") +
+                  process.env.REACT_APP_REQUEST_URL +
                   "/ad/" +
                   (item.image[0] || "uploads/default.png")
                 }
@@ -182,5 +183,3 @@ const ItemsForSale = () => {
 };
 
 export default ItemsForSale;
-
-

@@ -41,7 +41,7 @@ function App() {
 
   useEffect(() => {
     if (isLoggedin) {
-      setWs(new WebSocket("ws://"(process.env.base_url || "localhost:8080")));
+      setWs(new WebSocket(process.env.REACT_APP_WS_URL));
     }
   }, [isLoggedin]);
 

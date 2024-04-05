@@ -130,7 +130,7 @@ const ItemsWanted = () => {
                 component="img"
                 height="140"
                 image={
-                  (process.env.base_url || "http://localhost:8080") +
+                  process.env.REACT_APP_REQUEST_URL +
                   "/ad/" +
                   (item.image[0] || "uploads/default.png")
                 }
