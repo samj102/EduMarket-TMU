@@ -139,8 +139,10 @@ const MyAds = () => {
         <DialogTitle>Edit Ad</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Change any aspect of Ad and when done press save!
+            Change any aspect of your Ad and when done press save!
+
           </DialogContentText>
+          <br />
           <form onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
