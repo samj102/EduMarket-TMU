@@ -5,7 +5,6 @@ import validateForm from "../utils/validateForm.js";
 
 function Signup({ setIsLoggedIn }) {
   const history = useNavigate();
-  setIsLoggedIn(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");

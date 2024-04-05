@@ -25,7 +25,7 @@ const Chats = ({ profile, UserContext }) => {
 
   async function getChats() {
     const { data } = await api.get(`/user/${decoded.id}`);
-    if (data) {
+    if (data && data.chats.length > 0) {
       let chatArr = [];
       const chatIDs = data.chats;
       for (let i = 0; i < chatIDs.length; i++) {

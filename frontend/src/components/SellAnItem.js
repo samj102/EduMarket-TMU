@@ -46,9 +46,11 @@ const FormComponent = () => {
       formDataWithImages.append("price", formData.price);
       formDataWithImages.append("category", formData.category);
       formDataWithImages.append("post_person_id", formData.post_person_id);
-      formData.images.forEach((image, index) => {
-        formDataWithImages.append(`image`, formData.images[index]);
-      });
+      if (formData.images.length > 0) {
+        formData.images.forEach((image, index) => {
+          formDataWithImages.append(`image`, formData.images[index]);
+        });
+      }
       const response = await api.post("/ad", formDataWithImages, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -126,7 +128,6 @@ const FormComponent = () => {
               accept="image/*"
               onChange={handleImageChange}
               multiple
-              required={true}
             />
           </Grid>
           <Grid item xs={12}>
