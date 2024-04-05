@@ -1,0 +1,49 @@
+Front-End:
+The frontend folder will contain your react application code.
+src folder holds the main application logic and components:
+    App.js is the main component that renders the overall application structure.
+    components folder holds all UI components and those are:
+        - AboutUs.js
+        - AcademicServices.js
+        - Chats.js
+        - ContactUs.js
+        - Conversation.js
+        - EditProfile.js
+        - Home.js
+        - imagePage.js
+        - itemsForSale.js
+        - itemsWanted.js
+        - Login.js
+        - Logout.js
+        - Messages.js
+        - MyAds.js
+        - PrivacyPolicy.js
+        - SellAnItem.js
+        - SignUp.js
+        - ToS.js
+        - Users.js
+    reusable folder holds reusable UI components:
+        - container.js
+        - footer.js
+        - header.js
+    styles folder holds the css styling for the components
+    
+Back-End:
+The backend folder holds your server side code.
+app.js is the entry point for server application.
+models folder defines the data structures for yur database.
+    - chatModel.js
+    - postModel.js
+    - userModel.js
+routes folder defines API endpoints for user interactions.
+    - ad.js
+    - auth.js
+    - chat.js
+    - user.js
+middleware.js implements the authentication middleware.
+config folder holds configuration values for websocket and mongodb database.
+    - db.js
+    - server.js
+    - webSocket.js
+
+.env file is in the root of project directory which stores sensitive information like database credentials.
