@@ -122,8 +122,7 @@ const AcademicServicesPage = () => {
         <Button
           variant="contained"
           color="primary"
-          component={Link}
-          to="/src/components/MyAds"
+          onClick={() => navigate("/sell")}
           style={{ height: "55px", marginBottom: "20px" }}
         >
           Post an Ad

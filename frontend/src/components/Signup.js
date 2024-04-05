@@ -24,10 +24,10 @@ function Signup({ setIsLoggedIn }) {
         })
         .then((res) => {
           if (res.status === 200) {
-            setIsLoggedIn(true);
             localStorage.setItem("login", res.data.token);
             document.cookie = `access_token=${res.data.token}`;
             history("/home", { state: { id: email, token: res.data.token } });
+            setIsLoggedIn(true);
           } else if (res.status === 409) {
             alert("User already exists");
           }

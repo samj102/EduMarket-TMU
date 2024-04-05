@@ -38,6 +38,7 @@ router.post(
     try {
       const { title, description, post_person_id, price, category } = req.body;
       const uploadedImages = [];
+      console.log(req.files);
       for (const image of req.files) {
         uploadedImages.push(image.path);
       }

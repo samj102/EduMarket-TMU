@@ -7,6 +7,7 @@ const {
   authenticateAdminToken,
   authenticateOwnerToken,
 } = require("../middleware");
+const chatModel = require("../models/chatModel");
 
 //To check all the users in the databse
 router.get("/", authenticateAdminToken, async function (req, res, next) {
@@ -69,6 +70,9 @@ router.delete(
     try {
       const { id } = req.params;
       await postModel.deleteMany({ post_person_id: id });
+      await chatModel.deleteMany({
+        $or: [{ user_a: id }, { user_b: id }],
+      });
       const users = await userModel.findByIdAndDelete(id);
       res.status(200).json(users);
     } catch (error) {
