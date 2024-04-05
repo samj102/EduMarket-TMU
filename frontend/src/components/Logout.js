@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import "../styles/Login.css";
 const Logout = () => {
   localStorage.clear();
   const history = useNavigate();
@@ -9,9 +9,11 @@ const Logout = () => {
     window.location.reload();
   }
   return (
-    <div>
+    <div className="login_container">
+      <div className="Form">
       You have successfully logged out. Click{" "}
       <Link onClick={onClick}>here</Link> to login{" "}
+      </div>
     </div>
   );
 };
