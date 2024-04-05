@@ -12,7 +12,6 @@ import { useState, useEffect, createContext, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Users from "./components/Users.js";
 import Logout from "./components/Logout.js";
-import AboutUsPage from "./components/AboutUs.js";
 import UploadItemPage from "./components/itemsForSale.js";
 import ItemsWanted from "./components/itemsWanted.js";
 import AcademicServicesPage from "./components/AcademicServices.js";
@@ -85,11 +84,9 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/all-users" element={<Users />} />
             <Route path="/ToS" element={<ToS />} />
-            <Route path="/About_Us" element={<AboutUsPage />} />
             <Route path="/itemsForSale" element={<UploadItemPage />} />
             <Route path="/sell" element={<FormComponent />} />
             <Route path="/itemsWanted" element={<ItemsWanted />} />
-            <Route path="/aboutus" element={<AboutUsPage />} />
             <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />{" "}
             <Route
               path="/AcademicServices"
