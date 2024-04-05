@@ -3,8 +3,9 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import validateForm from "../utils/validateForm.js";
 import api from "../utils/api.js";
+import { jwtDecode } from "jwt-decode";
 
-function Signup({ setIsLoggedIn }) {
+function Signup({ setIsLoggedIn, setProfile }) {
   const history = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,18 +17,22 @@ function Signup({ setIsLoggedIn }) {
       return;
     }
     try {
-      await api
+      api
         .post("/auth/register", {
           name: name,
           email: email,
           password: password,
         })
-        .then((res) => {
+        .then(async (res) => {
           if (res.status === 200) {
-            localStorage.setItem("login", res.data.token);
-            document.cookie = `access_token=${res.data.token}`;
-            history("/home", { state: { id: email, token: res.data.token } });
-            setIsLoggedIn(true);
+            const token = res.data.token;
+            setIsLoggedIn("true");
+            localStorage.setItem("login", token);
+            document.cookie = `access_token=${token}`;
+            const decoded = jwtDecode(JSON.stringify(token));
+            const { data } = await api.get(`/user/${decoded.id}`);
+            setProfile({ email: data.email, name: data.name, id: data._id });
+            history("/home", { state: { id: email, token: token } });
           } else if (res.status === 409) {
             alert("User already exists");
           }

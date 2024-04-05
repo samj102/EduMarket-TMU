@@ -78,7 +78,9 @@ function App() {
             />
             <Route
               path="/signup"
-              element={<Signup setIsLoggedIn={setisLoggedin} />}
+              element={
+                <Signup setIsLoggedIn={setisLoggedin} setProfile={setProfile} />
+              }
             />
             <Route path="/logout" element={<Logout />} />
             <Route path="/home" element={<Home />} />
