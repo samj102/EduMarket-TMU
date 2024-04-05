@@ -4,7 +4,8 @@ const secretKey = process.env.JWT_SECRET_KEY;
 
 // Middleware to authenticate the owner of the token or admin
 function authenticateOwnerToken(req, res, next) {
-  const token = req.cookies["access_token"];
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(" ")[1];
   if (!token) return res.sendStatus(401);
   jwt.verify(token, secretKey, (err, user) => {
     if (err) return next(createError(403));
@@ -20,7 +21,8 @@ function authenticateOwnerToken(req, res, next) {
 
 // Middleware to authenticate the user
 function authenticateUserToken(req, res, next) {
-  const token = req.cookies["access_token"];
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(" ")[1];
   if (!token) return res.sendStatus(401);
   jwt.verify(token, secretKey, (err) => {
     if (err) return next(createError(403));
@@ -30,7 +32,8 @@ function authenticateUserToken(req, res, next) {
 
 // Middleware to authenticate the admin
 function authenticateAdminToken(req, res, next) {
-  const token = req.cookies["access_token"];
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(" ")[1];
   if (!token) return res.sendStatus(401);
   jwt.verify(token, secretKey, (err, user) => {
     if (err) return next(createError(403));
