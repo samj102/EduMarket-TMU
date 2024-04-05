@@ -117,7 +117,9 @@ function Header() {
               >
                 Your Profile
               </MenuItem>
-
+              <MenuItem component={Link} to="/MyAds" onClick={handleClose}>
+                {decoded.role === "admin" ? "All Ads" : "My Ads"}
+              </MenuItem>
               <MenuItem
                 component={Link}
                 to="/logout"
