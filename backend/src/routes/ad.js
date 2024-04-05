@@ -25,7 +25,7 @@ const {
 const postModel = require("../models/postModel");
 
 //To get the images uploaded by the user for the ads
-router.get("/uploads/:file", authenticateUserToken, (req, res) => {
+router.get("/uploads/:file", (req, res) => {
   res.sendFile(path.join(__dirname, `../../uploads/${req.params.file}`));
 });
 
