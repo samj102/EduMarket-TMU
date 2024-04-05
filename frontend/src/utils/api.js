@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// get cookie
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
