@@ -133,8 +133,12 @@ const ItemsForSale = () => {
               <CardMedia
                 component="img"
                 height="140"
-                image={"http://localhost:8080/ad/" + item.image[0]}
+                image={
+                  "http://localhost:8080/ad/" +
+                  (item.image[0] || "uploads/default.png")
+                }
                 alt={item.name}
+                sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">

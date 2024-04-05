@@ -134,7 +134,11 @@ const ItemsWanted = () => {
               <CardMedia
                 component="img"
                 height="140"
-                image={"http://localhost:8080/ad/" + item.image[0]}
+                image={
+                  "http://localhost:8080/ad/" +
+                  (item.image[0] || "uploads/default.png")
+                }
+                sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
                 alt={item.name}
               />
               <CardContent>

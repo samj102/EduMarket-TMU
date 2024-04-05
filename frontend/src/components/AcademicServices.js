@@ -131,9 +131,13 @@ const AcademicServicesPage = () => {
           <Grid item xs={12} sm={6} md={4} key={item._id}>
             <Card sx={{ p: 2 }}>
               <CardMedia
+                sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
                 component="img"
                 height="140"
-                image={"http://localhost:8080/ad/" + item.image[0]}
+                image={
+                  "http://localhost:8080/ad/" +
+                  (item.image[0] || "uploads/default.png")
+                }
                 alt={item.name}
               />
               <CardContent>
