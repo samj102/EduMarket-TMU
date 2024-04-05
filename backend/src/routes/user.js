@@ -69,12 +69,14 @@ router.delete(
   async function (req, res, next) {
     try {
       const { id } = req.params;
-      await postModel.deleteMany({ post_person_id: id });
+      const posts = await postModel.find({ post_person_id: id });
+      if (posts.length > 0) {
+        for (const p of posts) {
+          await postModel.findByIdAndDelete(p._id);
+        }
+      }
       const chat = await chatModel.find({
-        $or: [
-          { user_a: user_id1, user_b: user_id2 },
-          { user_a: user_id2, user_b: user_id1 },
-        ],
+        $or: [{ user_a: id }, { user_b: id }],
       });
       for (const c of chat) {
         await chatModel.findByIdAndDelete(c._id);

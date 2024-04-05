@@ -35,8 +35,12 @@ router.post("/register", async function (req, res, next) {
         email: email,
         password: hashedPassword,
       });
-      await newUser.save();
-      const token = generateToken({ email: email, role: "student" });
+      const createdUser = await newUser.save();
+      const token = generateToken({
+        id: createdUser._id,
+        email: email,
+        role: "student",
+      });
       res.status(200).json({ token });
     } else {
       next(createError(409, "User already exists"));
