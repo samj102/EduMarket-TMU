@@ -15,9 +15,11 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
   onError: function (err, next) {
+    console.log("error", err);
     next(err.code, err.message);
   },
 });
+
 const {
   authenticateOwnerToken,
   authenticateUserToken,
