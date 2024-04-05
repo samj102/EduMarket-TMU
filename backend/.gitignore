@@ -8,6 +8,7 @@ node_modules/
 uploads/*
 
 !uploads/.gitkeep
+!uploads/default.png
 
 *.DS_Store
 
