@@ -3,8 +3,9 @@ const createError = require("http-errors");
 const chatModel = require("../models/chatModel");
 const userModel = require("../models/userModel");
 const router = express.Router();
+const { authenticateUserToken } = require("../middleware");
 
-router.post("/", async (req, res, next) => {
+router.post("/", authenticateUserToken, async (req, res, next) => {
   const { sender, receiver, message } = req.body;
   const newMessage = {
     sender,
@@ -29,7 +30,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/:id", authenticateUserToken, async (req, res, next) => {
   const { id } = req.params;
   try {
     const chat = await chatModel.findById(id).populate("user_a user_b");
@@ -39,22 +40,26 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.get("/:user_id1/:user_id2", async (req, res, next) => {
-  const { user_id1, user_id2 } = req.params;
-  try {
-    const chat = await chatModel.find({
-      $or: [
-        { user_a: user_id1, user_b: user_id2 },
-        { user_a: user_id2, user_b: user_id1 },
-      ],
-    });
-    res.status(200).json(chat);
-  } catch (e) {
-    next(createError(500, e.message));
+router.get(
+  "/:user_id1/:user_id2",
+  authenticateUserToken,
+  async (req, res, next) => {
+    const { user_id1, user_id2 } = req.params;
+    try {
+      const chat = await chatModel.find({
+        $or: [
+          { user_a: user_id1, user_b: user_id2 },
+          { user_a: user_id2, user_b: user_id1 },
+        ],
+      });
+      res.status(200).json(chat);
+    } catch (e) {
+      next(createError(500, e.message));
+    }
   }
-});
+);
 
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", authenticateUserToken, async (req, res, next) => {
   const { id } = req.params;
   const { sender, message } = req.body;
   const newMessage = {
@@ -72,7 +77,7 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", authenticateUserToken, async (req, res, next) => {
   const { id } = req.params;
   try {
     const chat = await chatModel.findByIdAndDelete(id);
