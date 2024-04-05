@@ -1,4 +1,4 @@
-# EduMarket-TMU
+# AdVista
 
 TMU Classifieds Web Interface
 
