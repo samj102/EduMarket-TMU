@@ -70,9 +70,19 @@ router.delete(
     try {
       const { id } = req.params;
       await postModel.deleteMany({ post_person_id: id });
-      await chatModel.deleteMany({
-        $or: [{ user_a: id }, { user_b: id }],
+      const chat = await chatModel.find({
+        $or: [
+          { user_a: user_id1, user_b: user_id2 },
+          { user_a: user_id2, user_b: user_id1 },
+        ],
       });
+      for (const c of chat) {
+        await chatModel.findByIdAndDelete(c._id);
+        await userModel.findByIdAndUpdate(c.user_a, {
+          $pull: { chats: c._id },
+        });
+      }
+
       const users = await userModel.findByIdAndDelete(id);
       res.status(200).json(users);
     } catch (error) {
