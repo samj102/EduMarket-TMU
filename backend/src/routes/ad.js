@@ -59,7 +59,7 @@ router.post(
 
 //To update an ad in the database
 router.put(
-  "/:id",
+  "/:id/:post_person_id",
   authenticateOwnerToken,
   upload.array("image", 20),
   async function (req, res, next) {
@@ -108,22 +108,26 @@ router.get("/", authenticateUserToken, async function (req, res, next) {
 });
 
 //To delete an ad from the database
-router.delete("/:id", authenticateOwnerToken, async function (req, res, next) {
-  try {
-    const { id } = req.params;
-    const post = await postModel.findById(id);
-    for (const image of post.image) {
-      fs.unlinkSync(image);
-    }
-    await postModel.deleteOne({ _id: id });
-    res.sendStatus(200);
-  } catch (error) {
-    if (error.kind === "ObjectId") {
-      next(createError(404, "User not found"));
-    } else {
-      next(createError(500, "Failed attempt"));
+router.delete(
+  "/:id/:post_person_id",
+  authenticateOwnerToken,
+  async function (req, res, next) {
+    try {
+      const { id } = req.params;
+      const post = await postModel.findById(id);
+      for (const image of post.image) {
+        fs.unlinkSync(image);
+      }
+      await postModel.deleteOne({ _id: id });
+      res.sendStatus(200);
+    } catch (error) {
+      if (error.kind === "ObjectId") {
+        next(createError(404, "User not found"));
+      } else {
+        next(createError(500, "Failed attempt"));
+      }
     }
   }
-});
+);
 
 module.exports = router;

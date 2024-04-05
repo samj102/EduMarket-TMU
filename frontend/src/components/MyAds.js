@@ -67,12 +67,15 @@ const MyAds = () => {
         });
       }
 
-      const response = await api.put(`/ad/${EditItem._id}`, editform, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          post_person_id: EditItem.post_person_id,
-        },
-      });
+      const response = await api.put(
+        `/ad/${EditItem._id}/${EditItem.post_person_id}`,
+        editform,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       if (response.status === 200) {
         alert("Ad Changed successfully!");
       } else {
@@ -97,11 +100,7 @@ const MyAds = () => {
   };
 
   const handleDelete = (item) => {
-    const config = {
-      headers: { post_person_id: item.post_person_id },
-    };
-
-    api.delete("/ad/" + item._id, config);
+    api.delete(`/ad/${item._id}/${item.post_person_id}`);
     setTimeout(() => {
       fetchItems();
     }, 500);
@@ -204,7 +203,6 @@ const MyAds = () => {
                   accept="image/*"
                   onChange={handleImageChange}
                   multiple
-                  required={true}
                 />
               </Grid>
               <Grid item xs={12}>
