@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +8,7 @@ import api from "../utils/api";
 function Users() {
   const location = useLocation();
   const [data, setData] = useState([]);
+  const history = useNavigate();
 
   async function deleteUser(id, name) {
     if (window.confirm(`Are you sure you want to delete ${name}`)) {
@@ -41,8 +42,8 @@ function Users() {
             <table
               style={{
                 maxWidth: "100%",
-                  border: "1px solid",
-                  backgroundColor: "white",
+                border: "1px solid",
+                backgroundColor: "white",
               }}
             >
               <tr style={{ textAlign: "center", border: "1px solid" }}>
@@ -79,7 +80,7 @@ function Users() {
     }
   } catch (error) {
     alert("Please login");
-    window.location.href = "http://localhost:3000/login";
+    history("/login");
   }
 }
 

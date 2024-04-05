@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import validateForm from "../utils/validateForm.js";
+import api from "../utils/api.js";
 
 function Signup({ setIsLoggedIn }) {
   const history = useNavigate();
@@ -15,8 +16,8 @@ function Signup({ setIsLoggedIn }) {
       return;
     }
     try {
-      await axios
-        .post("http://localhost:8080/auth/register", {
+      await api
+        .post("/auth/register", {
           name: name,
           email: email,
           password: password,

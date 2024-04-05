@@ -16,7 +16,7 @@ function Login({ setIsLoggedIn, setProfile }) {
   async function submit(e) {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8080/auth/login", {
+      const res = await api.post("/auth/login", {
         email: email,
         password: password,
       });

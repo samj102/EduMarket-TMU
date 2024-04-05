@@ -135,7 +135,8 @@ const AcademicServicesPage = () => {
                 component="img"
                 height="140"
                 image={
-                  "http://localhost:8080/ad/" +
+                  (process.env.base_url || "http://localhost:8080") +
+                  "/ad/" +
                   (item.image[0] || "uploads/default.png")
                 }
                 alt={item.name}

@@ -135,7 +135,8 @@ const ItemsWanted = () => {
                 component="img"
                 height="140"
                 image={
-                  "http://localhost:8080/ad/" +
+                  (process.env.base_url || "http://localhost:8080") +
+                  "/ad/" +
                   (item.image[0] || "uploads/default.png")
                 }
                 sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
