@@ -86,52 +86,54 @@ const AcademicServicesPage = () => {
   );
 
   return (
-    <Container maxWidth="lg" style={{ marginTop: "20px" }}>
+    <Container maxWidth="lg" style={{ marginTop: "20px", textAlign: "center" }}>
       <Typography variant="h2" gutterBottom>
-        Academic Services
+        <span style={{ color: "#4CAF50" }}>A</span>cademic <span style={{ color: "#4CAF50" }}>S</span>ervices
       </Typography>
-      <TextField
-        fullWidth
-        label="Search Items"
-        variant="outlined"
-        onChange={handleSearchChange}
-        style={{ marginBottom: "20px" }}
-      />
-      <FormControl
-        variant="outlined"
-        style={{
-          width: "150px",
-          marginRight: "10px",
-          marginBottom: "20px",
-        }}
-      >
-        <InputLabel id="price-filter-label">Filter by Price</InputLabel>
-        <Select
-          labelId="price-filter-label"
-          id="price-filter"
-          value={filterPrice} // Add state for selected price filter
-          onChange={handleFilterPrice}
-          label="Filter by Price"
+      <div style={{ marginBottom: "20px", display: "flex", justifyContent: "center" }}>
+        <TextField
+          label="Search Items"
+          variant="outlined"
+          onChange={handleSearchChange}
+          style={{ marginRight: "10px", width: "200px" }}
+        />
+        <FormControl variant="outlined" style={{ marginRight: "10px" }}>
+          <InputLabel id="price-filter-label">Filter by Price</InputLabel>
+          <Select
+            labelId="price-filter-label"
+            id="price-filter"
+            value={filterPrice}
+            onChange={handleFilterPrice}
+            label="Filter by Price"
+            style={{ width: "200px" }}
+          >
+            <MenuItem value={"All"}>All</MenuItem>
+            <MenuItem value={"0 - 50"}>0 - 50</MenuItem>
+            <MenuItem value={"More than 50"}>More than 50</MenuItem>
+          </Select>
+        </FormControl>
+        <Button
+          variant="contained"
+          color="primary"
+          component={Link}
+          to="/src/components/MyAds"
+          style={{ height: "55px", marginBottom: "20px" }}
         >
-          <MenuItem value={"All"}>All</MenuItem>
-          <MenuItem value={"0 - 50"}>0 - 50</MenuItem>
-          <MenuItem value={"More than 50"}>More than 50</MenuItem>
-        </Select>
-      </FormControl>
-      <Button // Same routing to Sell an item page as creating a new one would be redundant
-        variant="contained"
-        color="primary"
-        onClick={() => navigate("/sell")} // Navigate to the sell page
-        style={{ height: "55px", marginBottom: "20px" }}
-      >
-        Post an Ad
-      </Button>
-      <Grid container spacing={3}>
+          Post an Ad
+        </Button>
+      </div>
+      <Grid container spacing={3} justifyContent="center">
         {filteredItems.map((item) => (
           <Grid item xs={12} sm={6} md={4} key={item._id}>
-            <Card sx={{ p: 2 }}>
+            <Card
+              sx={{
+                border: "2px solid #4caf50",
+                borderRadius: "8px",
+                height: "100%",
+              }}
+            >
               <CardMedia
-                sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
+                sx={{ padding: "1em", objectFit: "contain" }}
                 component="img"
                 height="140"
                 image={
@@ -152,17 +154,27 @@ const AcademicServicesPage = () => {
                   Price: ${item.price}
                 </Typography>
               </CardContent>
-              {decoded.id != item.post_person_id ? (
-                <button
-                  className="button-interested"
+              {decoded.id !== item.post_person_id ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginTop: "10px" }}
                   onClick={() =>
                     handleInterested(item.post_person_id, item.title)
                   }
                 >
                   Interested
-                </button>
+                </Button>
               ) : (
-                <button className="button-ownPost">Your Post</button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginTop: "10px" }}
+                  component={Link}
+                  to="/MyAds"
+                >
+                  Your Post
+                </Button>
               )}
             </Card>
           </Grid>

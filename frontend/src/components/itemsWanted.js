@@ -87,50 +87,45 @@ const ItemsWanted = () => {
   );
 
   return (
-    <Container maxWidth="lg" style={{ marginTop: "20px" }}>
+    <Container maxWidth="lg" style={{ marginTop: "20px", textAlign: "center" }}>
       <Typography variant="h2" gutterBottom>
-        Items Wanted
+        <span style={{ color: "#4CAF50" }}>I</span>
+        tems <span style={{ color: "#4CAF50" }}>W</span>anted
       </Typography>
-      <TextField
-        fullWidth
-        label="Search Items"
-        variant="outlined"
-        onChange={handleSearchChange}
-        style={{ marginBottom: "20px" }}
-      />
-      <FormControl
-        variant="outlined"
-        style={{
-          width: "150px",
-          marginRight: "10px",
-          marginBottom: "20px",
-        }}
-      >
-        <InputLabel id="price-filter-label">Filter by Price</InputLabel>
-        <Select
-          labelId="price-filter-label"
-          id="price-filter"
-          value={filterPrice} // Add state for selected price filter
-          onChange={handleFilterPrice}
-          label="Filter by Price"
-        >
-          <MenuItem value={"All"}>All</MenuItem>
-          <MenuItem value={"0 - 50"}>0 - 50</MenuItem>
-          <MenuItem value={"More than 50"}>More than 50</MenuItem>
-        </Select>
-      </FormControl>
-      <Button // Same routing to Sell an item page as creating a new one would be redundant
+      <div style={{ marginBottom: "20px" }}>
+        <TextField
+          label="Search Items"
+          variant="outlined"
+          onChange={handleSearchChange}
+          style={{ marginRight: "10px" }}
+        />
+        <FormControl variant="outlined" style={{ width: "150px" }}>
+          <InputLabel id="price-filter-label">Filter by Price</InputLabel>
+          <Select
+            labelId="price-filter-label"
+            id="price-filter"
+            value={filterPrice} // Add state for selected price filter
+            onChange={handleFilterPrice}
+            label="Filter by Price"
+          >
+            <MenuItem value={"All"}>All</MenuItem>
+            <MenuItem value={"0 - 50"}>0 - 50</MenuItem>
+            <MenuItem value={"More than 50"}>More than 50</MenuItem>
+          </Select>
+        </FormControl>
+      </div>
+      <Button
         variant="contained"
         color="primary"
-        onClick={() => navigate("/sell")} // Navigate to the sell page
+        onClick={() => navigate("/sell")}
         style={{ height: "55px", marginBottom: "20px" }}
       >
         Looking for something?
       </Button>
-      <Grid container spacing={3}>
+      <Grid container spacing={3} justifyContent="center">
         {filteredItems.map((item) => (
           <Grid item xs={12} sm={6} md={4} key={item._id}>
-            <Card sx={{ p: 2 }}>
+            <Card sx={{ border: "2px solid #4caf50", borderRadius: "8px" }}>
               <CardMedia
                 component="img"
                 height="140"
@@ -153,9 +148,12 @@ const ItemsWanted = () => {
                   Price: ${item.price}
                 </Typography>
               </CardContent>
-              {decoded.id != item.post_person_id ? (
+              {decoded.id !== item.post_person_id ? (
                 <button
                   className="button-interested"
+                  variant="contained"
+                  color="primary"
+                  style={{ marginTop: "10px" }}
                   onClick={() =>
                     handleInterested(item.post_person_id, item.title)
                   }

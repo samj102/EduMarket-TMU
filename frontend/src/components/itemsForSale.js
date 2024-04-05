@@ -6,8 +6,8 @@ import {
   CardContent,
   Typography,
   CardMedia,
-  Button,
   TextField,
+  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -86,60 +86,61 @@ const ItemsForSale = () => {
   );
 
   return (
-    <Container maxWidth="lg" style={{ marginTop: "20px" }}>
+    <Container maxWidth="lg" style={{ marginTop: "20px", textAlign: "center" }}>
       <Typography variant="h2" gutterBottom>
-        Items for Sale
+        <span style={{ color: "#4CAF50" }}>I</span>
+        tems <span style={{ color: "#4CAF50" }}>F</span>or <span style={{ color: "#4CAF50" }}>S</span>ale
       </Typography>
-      <TextField
-        fullWidth
-        label="Search Items"
-        variant="outlined"
-        onChange={handleSearchChange}
-        style={{ marginBottom: "20px" }}
-      />
-      <FormControl
-        variant="outlined"
-        style={{
-          width: "150px",
-          marginRight: "10px",
-          marginBottom: "20px",
-        }}
-      >
-        <InputLabel id="price-filter-label">Filter by Price</InputLabel>
-        <Select
-          labelId="price-filter-label"
-          id="price-filter"
-          value={filterPrice} // Add state for selected price filter
-          onChange={handleFilterPrice}
-          label="Filter by Price"
+      <div style={{ marginBottom: "20px" }}>
+        <div style={{ marginBottom: "20px" }}>
+          <TextField
+            label="Search Items"
+            variant="outlined"
+            onChange={handleSearchChange}
+            style={{ marginRight: "10px" }}
+          />
+          <FormControl variant="outlined" style={{ width: "150px" }}>
+            <InputLabel id="price-filter-label">Filter by Price</InputLabel>
+            <Select
+              labelId="price-filter-label"
+              id="price-filter"
+              value={filterPrice} // Add state for selected price filter
+              onChange={handleFilterPrice}
+              label="Filter by Price"
+            >
+              <MenuItem value={"All"}>All</MenuItem>
+              <MenuItem value={"0 - 50"}>0 - 50</MenuItem>
+              <MenuItem value={"More than 50"}>More than 50</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => navigate("/sell")}
+          style={{ height: "55px", marginBottom: "20px" }}
         >
-          <MenuItem value={"All"}>All</MenuItem>
-          <MenuItem value={"0 - 50"}>0 - 50</MenuItem>
-          <MenuItem value={"More than 50"}>More than 50</MenuItem>
-        </Select>
-      </FormControl>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => navigate("/sell")} // Navigate to the sell page
-        style={{ height: "55px", marginBottom: "20px" }}
-      >
-        Sell Your Item
-      </Button>
-      <Grid container spacing={3}>
+          Sell Your Item
+        </Button>
+      </div>
+      <Grid container spacing={3} justifyContent="center">
         {filteredItems.map((item) => (
           <Grid item xs={12} sm={6} md={4} key={item._id}>
-            <Card sx={{ p: 2 }}>
+            <Card sx={{ border: "2px solid #4caf50", borderRadius: "8px" }}>
               <CardMedia
                 component="img"
-                height="140"
+                height="200"
                 image={
                   (process.env.base_url || "http://localhost:8080") +
                   "/ad/" +
                   (item.image[0] || "uploads/default.png")
                 }
                 alt={item.name}
-                sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
+                sx={{
+                  padding: "1em",
+                  objectFit: "contain",
+                  marginBottom: "0.5em",
+                }}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -152,17 +153,25 @@ const ItemsForSale = () => {
                   Price: ${item.price}
                 </Typography>
               </CardContent>
-              {decoded.id != item.post_person_id ? (
-                <button
-                  className="button-interested"
+              {decoded.id !== item.post_person_id ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginTop: "10px" }}
                   onClick={() =>
                     handleInterested(item.post_person_id, item.title)
                   }
                 >
                   Interested
-                </button>
+                </Button>
               ) : (
-                <button className="button-ownPost">Your Post</button>
+                <Button
+                  variant="outlined"
+                  disabled
+                  style={{ marginTop: "10px" }}
+                >
+                  Your Post
+                </Button>
               )}
             </Card>
           </Grid>
@@ -173,3 +182,5 @@ const ItemsForSale = () => {
 };
 
 export default ItemsForSale;
+
+
