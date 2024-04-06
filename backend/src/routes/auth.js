@@ -8,6 +8,13 @@ const router = express.Router();
 const secretKey = process.env.JWT_SECRET_KEY;
 const algorithm = process.env.JWT_ALGORITHM;
 
+/**
+ * Hashes the given password using bcrypt.
+ *
+ * @param {string} password - The password to be hashed.
+ * @returns {string} - The hashed password.
+ * @throws {Error} - If an error occurs while hashing the password.
+ */
 function hashPassword(password) {
   const saltRounds = 10;
   try {
@@ -17,6 +24,12 @@ function hashPassword(password) {
   }
 }
 
+/**
+ * Generates a JSON Web Token (JWT) using the provided data.
+ *
+ * @param {Object} data - The data to be included in the token.
+ * @returns {string} - The generated JWT.
+ */
 function generateToken(data) {
   return jwt.sign(data, secretKey, {
     algorithm: algorithm,

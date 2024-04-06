@@ -1,5 +1,13 @@
 import React from "react";
 
+/**
+ * Represents a conversation component.
+ * @param {Object} props - The props object containing data, setChat, and setUserName.
+ * @param {Object} props.data - The data object containing chatID and user.
+ * @param {Function} props.setChat - The function to set the chatID.
+ * @param {Function} props.setUserName - The function to set the user name.
+ * @returns {JSX.Element} The conversation component.
+ */
 const Conversation = ({ data, setChat, setUserName }) => {
   return (
     <div

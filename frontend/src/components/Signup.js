@@ -5,6 +5,14 @@ import validateForm from "../utils/validateForm.js";
 import api from "../utils/api.js";
 import { jwtDecode } from "jwt-decode";
 
+/**
+ * Signup component for user registration.
+ *
+ * @param {Object} props - The component props.
+ * @param {function} props.setIsLoggedIn - Function to set the login status.
+ * @param {function} props.setProfile - Function to set the user profile.
+ * @returns {JSX.Element} The Signup component.
+ */
 function Signup({ setIsLoggedIn, setProfile }) {
   const history = useNavigate();
   const [email, setEmail] = useState("");

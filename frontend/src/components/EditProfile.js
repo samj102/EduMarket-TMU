@@ -9,9 +9,22 @@ import {
 } from "@mui/material";
 import api from "../utils/api";
 
+/**
+ * EditProfile component allows users to edit their profile information.
+ * @param {Object} props - The component props.
+ * @param {Object} props.profile - The user's profile object.
+ * @param {Function} props.setProfile - The function to update the user's profile.
+ * @returns {JSX.Element} - The EditProfile component.
+ */
 const EditProfile = ({ profile, setProfile }) => {
   const [name, setName] = useState(profile.name);
   const [email, setEmail] = useState(profile.email);
+
+  /**
+   * Updates the user's profile information.
+   * If the name or email is empty or unchanged, or both are unchanged, an alert is shown.
+   * Otherwise, the profile is updated using an API call, and the updated profile is set.
+   */
   async function updateUser() {
     if (
       (name === profile.name && email === profile.email) ||

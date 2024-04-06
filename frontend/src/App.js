@@ -27,6 +27,10 @@ import { jwtDecode } from "jwt-decode";
 
 const UserContext = createContext();
 
+/**
+ * The main component of the application.
+ * @returns {JSX.Element} The rendered App component.
+ */
 function App() {
   const [isLoggedin, setisLoggedin] = useState(false);
   const [profile, setProfile] = useState({});

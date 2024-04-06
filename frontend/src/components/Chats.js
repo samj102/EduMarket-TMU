@@ -5,6 +5,13 @@ import Conversation from "./Conversation.js";
 import Messages from "./Messages.js";
 import { jwtDecode } from "jwt-decode";
 
+/**
+ * Renders the Chats component.
+ *
+ * @param {Object} profile - The profile object.
+ * @param {Object} UserContext - The UserContext object.
+ * @returns {JSX.Element} The Chats component.
+ */
 const Chats = ({ profile, UserContext }) => {
   const decoded = jwtDecode(localStorage.getItem("login"));
   const [chat, setChat] = useState("");
@@ -13,6 +20,7 @@ const Chats = ({ profile, UserContext }) => {
   const didWsChange = useRef(false);
 
   const ws = useContext(UserContext);
+
   useEffect(() => {
     if (didWsChange.current) {
       ws.addEventListener("message", (message) => {
@@ -23,6 +31,9 @@ const Chats = ({ profile, UserContext }) => {
     }
   }, [ws]);
 
+  /**
+   * Fetches the chats from the server.
+   */
   async function getChats() {
     const { data } = await api.get(`/user/${decoded.id}`);
     if (data && data.chats.length > 0) {

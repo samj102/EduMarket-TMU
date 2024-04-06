@@ -6,6 +6,15 @@ import { jwtDecode } from "jwt-decode";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
 
+/**
+ * Messages component displays the chat messages and allows users to send new messages.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.chat - The chat ID.
+ * @param {string} props.userName - The username of the user.
+ * @param {Object} props.UserContext - The user context object.
+ * @returns {JSX.Element} The Messages component.
+ */
 const Messages = ({ chat, userName, UserContext }) => {
   const decoded = jwtDecode(localStorage.getItem("login"));
 
@@ -14,10 +23,19 @@ const Messages = ({ chat, userName, UserContext }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
+  /**
+   * Handles the change event of the new message input.
+   *
+   * @param {string} newMessage - The new message value.
+   */
   function handleNewMessage(newMessage) {
     setNewMessage(newMessage);
   }
 
+  /**
+   * Handles the click event of the send message button.
+   * Sends the new message to the server and updates the messages list.
+   */
   async function handleMessageClick() {
     const data = { sender: decoded.id, message: newMessage };
     const res = await api.put(`/chat/${chat}`, data);
@@ -40,6 +58,9 @@ const Messages = ({ chat, userName, UserContext }) => {
     });
   }, []);
 
+  /**
+   * Fetches the messages for the current chat from the server.
+   */
   async function getMessages() {
     if (chat) {
       const { data } = await api.get(`/chat/${chat}`);
@@ -48,11 +69,13 @@ const Messages = ({ chat, userName, UserContext }) => {
       }
     }
   }
+
   useEffect(() => {
     getMessages();
   }, [chat]);
 
   const scroll = useRef();
+
   return (
     <>
       <div className="ChatBox-container">

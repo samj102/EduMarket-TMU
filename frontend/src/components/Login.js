@@ -6,13 +6,29 @@ import { jwtDecode } from "jwt-decode";
 
 import "../styles/Login.css";
 
+/**
+ * Renders the Login component.
+ *
+ * @param {Object} props - The component props.
+ * @param {Function} props.setIsLoggedIn - The function to set the login status.
+ * @param {Function} props.setProfile - The function to set the user profile.
+ * @returns {JSX.Element} The rendered Login component.
+ */
 function Login({ setIsLoggedIn, setProfile }) {
   const history = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // Redirect to home if already logged in
   if (localStorage.getItem("login") !== null) {
     history("/home");
   }
+
+  /**
+   * Handles the form submission.
+   *
+   * @param {Event} e - The form submit event.
+   */
   async function submit(e) {
     e.preventDefault();
     try {

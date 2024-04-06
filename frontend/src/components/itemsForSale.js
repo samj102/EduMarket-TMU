@@ -17,17 +17,31 @@ import { useNavigate } from "react-router-dom";
 import api from "../utils/api";
 import { jwtDecode } from "jwt-decode";
 
+/**
+ * Renders a component that displays items for sale.
+ * @returns {JSX.Element} The ItemsForSale component.
+ */
 const ItemsForSale = () => {
+  // State variables
   const [filterPrice, setFilterPrice] = useState("");
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const decoded = jwtDecode(localStorage.getItem("login"));
 
+  /**
+   * Handles the change event of the search input field.
+   * @param {Object} event - The event object.
+   */
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value.toLowerCase());
   };
 
+  /**
+   * Handles the interested action for an item.
+   * @param {string} authorID - The ID of the item's author.
+   * @param {string} postTitle - The title of the item's post.
+   */
   async function handleInterested(authorID, postTitle) {
     const res = await api.get(`/chat/${decoded.id}/${authorID}`);
 
@@ -53,6 +67,10 @@ const ItemsForSale = () => {
     }
   }
 
+  /**
+   * Handles the change event of the price filter select field.
+   * @param {Object} event - The event object.
+   */
   const handleFilterPrice = async (event) => {
     const filter = event.target.value;
     const response = await api.get("/ad");
@@ -66,6 +84,9 @@ const ItemsForSale = () => {
     setFilterPrice(filter);
   };
 
+  /**
+   * Fetches the items from the API.
+   */
   const fetchItems = async () => {
     try {
       const response = await api.get("/ad");
@@ -74,10 +95,13 @@ const ItemsForSale = () => {
       console.error("Failed to fetch items:", error);
     }
   };
+
+  // Fetch items on component mount
   useEffect(() => {
     fetchItems();
   }, []);
 
+  // Filter items based on search query and category
   let filteredItems = items.filter(
     (item) =>
       (item.title.toLowerCase().includes(searchQuery) ||

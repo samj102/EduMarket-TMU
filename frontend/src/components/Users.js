@@ -5,24 +5,36 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import api from "../utils/api";
 
+/**
+ * Renders a component that displays a list of users.
+ * If the user is an admin, it shows the list of users with the option to delete them.
+ * If the user is not an admin, it displays a message indicating the lack of permissions.
+ */
 function Users() {
   const location = useLocation();
   const [data, setData] = useState([]);
   const history = useNavigate();
 
+  /**
+   * Deletes a user from the backend server.
+   * @param {string} id - The ID of the user to be deleted.
+   * @param {string} name - The name of the user to be deleted.
+   */
   async function deleteUser(id, name) {
     if (window.confirm(`Are you sure you want to delete ${name}`)) {
       await api.delete(`user/delete/${id}`);
       const { data } = await api.get("/user");
       setData(data);
     } else {
+      // Do nothing
     }
   }
 
-  //   Fetching users from the backend server
+  // Fetching users from the backend server
   useEffect(() => {
     api.get("/user").then(({ data }) => setData(data));
   }, []);
+
   try {
     const tok = localStorage.getItem("login");
     const decoded = jwtDecode(tok);
@@ -73,7 +85,7 @@ function Users() {
       return (
         <div className="homepage">
           <h1>
-            Sorry, you do not have the persmissions to get the list of users
+            Sorry, you do not have the permissions to get the list of users.
           </h1>
         </div>
       );

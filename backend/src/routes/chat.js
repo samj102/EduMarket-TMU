@@ -40,6 +40,13 @@ router.get("/:id", authenticateUserToken, async (req, res, next) => {
   }
 });
 
+/**
+ * Retrieves chat messages between two users based on their IDs.
+ *
+ * @param {string} user_id1 - The ID of the first user.
+ * @param {string} user_id2 - The ID of the second user.
+ * @returns {Promise<ChatMessage[]>} The array of chat messages between the two users.
+ */
 router.get(
   "/:user_id1/:user_id2",
   authenticateUserToken,

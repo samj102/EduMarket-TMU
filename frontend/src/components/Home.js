@@ -7,10 +7,14 @@ import { Container, Typography, Grid, Paper } from "@mui/material";
 function Home() {
   const history = useNavigate();
   const tok = localStorage.getItem("login");
+
+  // Redirect to login page if user is not logged in
   if (!tok) {
     history("/login");
   }
+
   const decoded = jwtDecode(tok);
+
   return (
     <>
       <div className="parent-container">
@@ -36,6 +40,7 @@ function Home() {
                     Our Mission
                   </Typography>
                   <Typography paragraph>
+                    {/* Mission description */}
                     At AdVista, our mission is to revolutionize the way students
                     at Toronto Metropolitan University (TMU) engage in commerce
                     and academic exchange. Our platform is designed to empower
@@ -57,6 +62,7 @@ function Home() {
                     Our Story
                   </Typography>
                   <Typography paragraph>
+                    {/* Story description */}
                     AdVista was conceived by a group of five ambitious Computer
                     Science students from Toronto Metropolitan University (TMU),
                     driven by a shared passion for innovation and a desire to
@@ -78,7 +84,7 @@ function Home() {
                   </Typography>
                 </Paper>
               </Grid>
-              {}
+              {/* Add more Grid items if needed */}
             </Grid>
           </Container>
         </div>

@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../utils/api";
+import { jwtDecode } from "jwt-decode";
 import {
   Container,
   Grid,
@@ -13,21 +16,22 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import api from "../utils/api";
-import { jwtDecode } from "jwt-decode";
 
 const AcademicServicesPage = () => {
+  // State variables
   const [filterPrice, setFilterPrice] = useState("");
   const [items, setItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const decoded = jwtDecode(localStorage.getItem("login"));
 
   const navigate = useNavigate();
+
+  // Event handler for search input change
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value.toLowerCase());
   };
 
+  // Function to handle interested button click
   async function handleInterested(authorID, postTitle) {
     const res = await api.get(`/chat/${decoded.id}/${authorID}`);
 
@@ -53,6 +57,7 @@ const AcademicServicesPage = () => {
     }
   }
 
+  // Event handler for filter by price select change
   const handleFilterPrice = async (event) => {
     const filter = event.target.value;
     const response = await api.get("/ad");
@@ -66,6 +71,7 @@ const AcademicServicesPage = () => {
     setFilterPrice(filter);
   };
 
+  // Function to fetch items from the API
   const fetchItems = async () => {
     try {
       const response = await api.get("/ad");
@@ -74,10 +80,13 @@ const AcademicServicesPage = () => {
       console.error("Failed to fetch items:", error);
     }
   };
+
+  // Fetch items on component mount
   useEffect(() => {
     fetchItems();
   }, []);
 
+  // Filter items based on search query and category
   const filteredItems = items.filter(
     (item) =>
       (item.title.toLowerCase().includes(searchQuery) ||
@@ -87,6 +96,7 @@ const AcademicServicesPage = () => {
 
   return (
     <Container maxWidth="lg" style={{ marginTop: "20px", textAlign: "center" }}>
+      {/* Page title */}
       <Typography variant="h2" gutterBottom>
         <span style={{ color: "#4CAF50" }}>A</span>cademic{" "}
         <span style={{ color: "#4CAF50" }}>S</span>ervices
@@ -98,12 +108,14 @@ const AcademicServicesPage = () => {
           justifyContent: "center",
         }}
       >
+        {/* Search input */}
         <TextField
           label="Search Items"
           variant="outlined"
           onChange={handleSearchChange}
           style={{ marginRight: "10px", width: "200px" }}
         />
+        {/* Filter by price select */}
         <FormControl variant="outlined" style={{ marginRight: "10px" }}>
           <InputLabel id="price-filter-label">Filter by Price</InputLabel>
           <Select
@@ -119,6 +131,7 @@ const AcademicServicesPage = () => {
             <MenuItem value={"More than 50"}>More than 50</MenuItem>
           </Select>
         </FormControl>
+        {/* Post an ad button */}
         <Button
           variant="contained"
           color="primary"
@@ -128,6 +141,7 @@ const AcademicServicesPage = () => {
           Post an Ad
         </Button>
       </div>
+      {/* Grid of items */}
       <Grid container spacing={3} justifyContent="center">
         {filteredItems.map((item) => (
           <Grid item xs={12} sm={6} md={4} key={item._id}>
@@ -138,6 +152,7 @@ const AcademicServicesPage = () => {
                 height: "100%",
               }}
             >
+              {/* Item image */}
               <CardMedia
                 sx={{ padding: "1em", objectFit: "contain" }}
                 component="img"
@@ -150,16 +165,20 @@ const AcademicServicesPage = () => {
                 alt={item.name}
               />
               <CardContent>
+                {/* Item title */}
                 <Typography gutterBottom variant="h5" component="div">
                   {item.title}
                 </Typography>
+                {/* Item description */}
                 <Typography variant="body2" color="text.secondary">
                   {item.description}
                 </Typography>
+                {/* Item price */}
                 <Typography variant="body2" color="text.secondary">
                   Price: ${item.price}
                 </Typography>
               </CardContent>
+              {/* Interested button */}
               {decoded.id !== item.post_person_id ? (
                 <Button
                   variant="contained"
